@@ -1,5 +1,6 @@
 :root {
-    --primary-color: #000000;
+    --primary-color: #16118b;
+    --primary-color-transparent: #16118b84;
     --background-color: #f0f0f0;
 }
 
@@ -13,6 +14,7 @@ body {
     margin: 0;
     font: 16px;
     box-sizing: border-box;
+    color: var(--primary-color);
 }
 
 .sudoku-container {
@@ -33,6 +35,7 @@ body {
 }
 
 .sudoku-cell {
+    color: var(--primary-color);
     width: 3rem;
     height: 3rem;
     display: flex;
@@ -43,5 +46,10 @@ body {
     border-radius: 0.3rem;
     border: 0.01rem solid var(--primary-color);
     background-color: transparent;
-    box-shadow: 0.1rem 0.1rem 0.1rem 0.001rem var(--primary-color);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.001rem var(--primary-color-transparent);
+}
+
+.sudoku-cell:focus{
+    outline: none;
+    box-shadow: inset 0.1rem 0.1rem 0.1rem 0.001rem var(--primary-color-transparent);
 }

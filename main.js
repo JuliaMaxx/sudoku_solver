@@ -1,6 +1,7 @@
 const grid = document.getElementById("sudoku-grid");
 const gridSize = 9;
 const subgridSize = Math.sqrt(gridSize);
+const cells = [];
 
 grid.style.gridTemplateColumns = `repeat(${gridSize}, auto)`;
 grid.style.gridTemplateRows = `repeat(${gridSize}, auto)`;
@@ -13,9 +14,17 @@ for(let row = 0; row < gridSize; row++) {
         cell.maxLength = 1; 
         cell.inputMode = "numeric"; 
         cell.pattern = "[1-9]"; 
-        
+
         cell.addEventListener("input", function () {
             this.value = this.value.replace(/[^1-9]/g, ''); // Remove anything that is not 1-9
+            
+            if (this.value.length === 1) {
+                // Find the next input and focus it
+                const index = cells.indexOf(this);
+                if (index !== -1 && index < cells.length - 1) {
+                    cells[index + 1].focus();
+                }
+            }
         });
         
         if (col % subgridSize === subgridSize - 1) {
@@ -31,5 +40,6 @@ for(let row = 0; row < gridSize; row++) {
             cell.style.marginTop = "4px";
         }
         grid.appendChild(cell);
+        cells.push(cell); 
     }
 }

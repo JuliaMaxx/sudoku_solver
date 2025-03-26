@@ -82,37 +82,41 @@ function generateGrid(){
 
 function moveFocus(row, col, direction) {
     let newRow = row, newCol = col;
-
-    if (direction === "right") {
-        newCol++;
-        if (newCol >= gridSize) {
-            newCol = 0;
-            newRow = (row + 1) % gridSize;
+    
+    while (true) {
+        if (direction === "right") {
+            newCol++;
+            if (newCol >= gridSize) {
+                newCol = 0;
+                newRow = (newRow + 1) % gridSize;
+            }
         }
-    }
 
-    if (direction === "left") {
-        newCol--;
-        if (newCol < 0) { 
-            newCol = gridSize - 1;
-            newRow = (row - 1 + gridSize) % gridSize;
+        if (direction === "left") {
+            newCol--;
+            if (newCol < 0) { 
+                newCol = gridSize - 1;
+                newRow = (newRow - 1 + gridSize) % gridSize;
+            }
         }
-    }
 
-    if (direction === "down") {
-        newRow = (row + 1) % gridSize; 
-    }
+        if (direction === "down") {
+            newRow = (newRow + 1) % gridSize;
+        }
 
-    if (direction === "up") {
-        newRow = (row - 1 + gridSize) % gridSize;
-    }
+        if (direction === "up") {
+            newRow = (newRow - 1 + gridSize) % gridSize;
+        }
 
-    const nextCell = document.querySelector(`[data-row="${newRow}"][data-col="${newCol}"]`);
-    if (nextCell) {
-        nextCell.focus();
-        setTimeout(() => setCaretToEnd(nextCell), 0);
+        const nextCell = document.querySelector(`[data-row="${newRow}"][data-col="${newCol}"]`);
+        if (!nextCell.readOnly) {  
+            nextCell.focus();
+            setTimeout(() => setCaretToEnd(nextCell), 0);
+            break;
+        }
     }
 }
+
 
 function setCaretToEnd(cell) {
     const length = cell.value.length;

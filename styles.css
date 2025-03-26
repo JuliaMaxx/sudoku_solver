@@ -181,9 +181,6 @@ input[type="range"]:disabled {
         height: 1.3rem;
         font-size: 1rem;
     }
-    .valid:hover, .invalid:hover{
-        border: 0.1rem solid var(--primary-color);
-    }
 }
 
 @media (max-width: 800px) {
@@ -206,9 +203,6 @@ input[type="range"]:disabled {
     }
     button {
         padding: 0.5rem 0.6rem;
-    }
-    .valid:hover, .invalid:hover{
-        border: 0.1rem solid var(--primary-color);
     }
 }
 

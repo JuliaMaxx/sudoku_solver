@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="main.js" defer></script>
     <script defer type="module" src="ui.js"></script> 
+    <script defer type="module" src="controls.js"></script> 
     <title>Sudoku Solver</title>
 </head>
 <body>
@@ -21,7 +22,7 @@
         <div class="btn-menu">
             <button>Solve</button>
             <button>Solve cell</button>
-            <button>Generate</button>
+            <button id="generateButton">Generate</button>
             <button>Reset</button>
         </div>
         <input type="range" id="slider" min="4" max="48" value="9">

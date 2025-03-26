@@ -111,8 +111,8 @@ input[type="range"]:disabled {
     display: grid;
     padding: 1rem;
     gap: 0.3rem;
-    justify-content: center;
-    align-items: center;
+    width: 27rem;
+    height: 27rem;
     border-radius: 1rem;
     border: 0.2rem solid var(--primary-color);
 }
@@ -120,12 +120,11 @@ input[type="range"]:disabled {
 /* CELLS */
 .sudoku-cell {
     color: var(--primary-color);
-    width: 2.1rem;
-    height: 2.1rem;
+    min-width: 0;
+    min-height: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
     text-align: center;
     border-radius: 0.3rem;
     border: 0.1rem solid var(--primary-color);
@@ -181,10 +180,9 @@ input[type="range"]:disabled {
     :root {
         font-size: 12px;
     }
-    .sudoku-cell {
-        width: 1.3rem;
-        height: 1.3rem;
-        font-size: 1rem;
+    #sudoku-grid{
+        width: 18rem;
+        height: 18rem;
     }
 }
 
@@ -192,10 +190,9 @@ input[type="range"]:disabled {
     :root {
         font-size: 12px;
     }
-    .sudoku-cell {
-        width: 1.6rem;
-        height: 1.6rem;
-        font-size: 1.3rem;
+    #sudoku-grid{
+        width: 25rem;
+        height: 25rem;
     }
     .sudoku-grid{
         padding: 0.5rem;
@@ -215,10 +212,9 @@ input[type="range"]:disabled {
     body {
         font-size: 20px;
     }
-    .sudoku-cell {
-        width: 3rem;
-        height: 3rem;
-        font-size: 1.8rem;
+    #sudoku-grid{
+        width: 29rem;
+        height: 29rem;
     }
     .title {
         font-size: 6rem;

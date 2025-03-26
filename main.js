@@ -25,6 +25,9 @@ export function generateGrid(){
             cell.pattern = "[1-9]"; 
             cell.dataset.row = row; 
             cell.dataset.col = col; 
+            setTimeout(() => {
+                cell.style.fontSize = `${cell.clientWidth * 0.6}px`; 
+            }, 0)
     
             cell.addEventListener("input", function () {
                 let newValue = this.value.replace(/[^1-9]/g, ''); 

@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSliderBackground();
 
     slider.addEventListener("input", () => {
-        output.textContent = `${slider.value}x${slider.value}`;
+        output.textContent = `${slider.value} x ${slider.value}`;
         updateSliderBackground();
     });
 });

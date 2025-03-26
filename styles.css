@@ -4,6 +4,7 @@
     --background-color: #f0f0f0;
     --valid-color: rgb(28, 210, 28);
     --invalid-color: rgb(231, 19, 19);
+    font-size: 16px;
 }
 
 /* Fonts */
@@ -23,7 +24,6 @@ body {
     height: 100vh;
     background-color: var(--background-color);
     margin: 0;
-    font: 16px;
     box-sizing: border-box;
     color: var(--primary-color);
 }
@@ -120,7 +120,7 @@ input[type="range"]:disabled {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     text-align: center;
     border-radius: 0.3rem;
     border: 0.1rem solid var(--primary-color);
@@ -168,21 +168,34 @@ input[type="range"]:disabled {
     gap: 0.6rem;
 }
 
+@media (max-width: 400px){
+    .sudoku-cell {
+        width: 1rem;
+        height: 1rem;
+        font-size: 1.3rem;
+    }
+}
 
-@media (max-width: 600px) {
-    body {
-        font-size: 14px;
+@media (max-width: 800px) {
+    :root {
+        font-size: 12px;
     }
     .sudoku-cell {
-        width: 1.7rem;
-        height: 1.7rem;
+        width: 1.6rem;
+        height: 1.6rem;
         font-size: 1.3rem;
+    }
+    .sudoku-grid{
+        padding: 0.5rem;
     }
     .title {
         font-size: 4rem;
     }
     #sliderValue{
         font-size: 1.5rem;
+    }
+    button {
+        padding: 0.5rem 0.6rem;
     }
 }
 
@@ -193,6 +206,7 @@ input[type="range"]:disabled {
     .sudoku-cell {
         width: 3rem;
         height: 3rem;
+        font-size: 1.8rem;
     }
     .title {
         font-size: 6rem;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="main.js" defer></script>
-    <script defer type="module" src="ui.js"></script> 
-    <script defer type="module" src="controls.js"></script> 
+    <script defer type="module" src="ui.js"></script>
+    <script defer type="module" src="controls.js"></script>
     <title>Sudoku Solver</title>
 </head>
+
 <body>
     <h1 class="title">Sudoku Solver</h1>
     <div class="sudoku-container">
@@ -20,13 +22,28 @@
     </div>
     <div class="control-panel">
         <div class="btn-menu">
-            <button>Solve</button>
-            <button>Solve cell</button>
+            <button id="solveButton">Solve</button>
+            <button id="solveCellButton">Solve cell</button>
             <button id="generateButton">Generate</button>
             <button id="resetButton">Reset</button>
         </div>
         <input type="range" id="slider" min="4" max="49" value="9">
         <span id="sliderValue">9 x 9</span>
     </div>
+
+    <!-- Modal -->
+    <div id="difficultyModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close-x">&times;</span>
+            <h2>Select Difficulty</h2>
+            <div class="modal-btn">
+                <button class="difficulty-btn easy" data-level="easy">Easy</button>
+                <button class="difficulty-btn medium" data-level="medium">Medium</button>
+                <button class="difficulty-btn hard" data-level="hard">Hard</button>
+            </div>
+
+        </div>
+    </div>
 </body>
+
 </html>

@@ -5,7 +5,8 @@ const cells = [];
 
 window.onload = () => {
     generateGrid();
-    focusOnCell(0);
+    cells[0].focus();
+    
 }
 
 function generateGrid(){
@@ -20,6 +21,8 @@ function generateGrid(){
             cell.maxLength = 1; 
             cell.inputMode = "numeric"; 
             cell.pattern = "[1-9]"; 
+            cell.dataset.row = row; 
+            cell.dataset.col = col; 
     
             cell.addEventListener("input", function () {
                 // Remove anything that is not 1-9
@@ -28,8 +31,8 @@ function generateGrid(){
                 if (this.value.length === 1) {
                     // Find the next input and focus it
                     const index = cells.indexOf(this);
-                    if (index !== -1 && index < cells.length - 1) {
-                        focusOnCell(index + 1)
+                    if (this.value.length === 1) {
+                        moveFocus(row, col, "right"); 
                     }
                 }
             });
@@ -46,13 +49,63 @@ function generateGrid(){
             if (row % subgridSize === 0) {
                 cell.classList.add("top-border");
             }
-    
+
+            // Handle arrow key navigation
+            cell.addEventListener("keydown", function (event) {
+                if (event.key === "ArrowRight") moveFocus(row, col, "right");
+                if (event.key === "ArrowLeft") moveFocus(row, col, "left");
+                if (event.key === "ArrowUp") moveFocus(row, col, "up");
+                if (event.key === "ArrowDown") moveFocus(row, col, "down");
+
+                // Backspace moves focus left if the cell is empty
+                if (event.key === "Backspace" && this.value === "") {
+                    moveFocus(row, col, "left");
+                }
+            });
             grid.appendChild(cell);
             cells.push(cell); 
         }
     }
 }
 
-function focusOnCell(index){
-    cells[index].focus();
+// Function to move focus based on direction with wrapping
+function moveFocus(row, col, direction) {
+    let newRow = row, newCol = col;
+
+    if (direction === "right") {
+        newCol++;
+        if (newCol >= gridSize) { // Wrap to next row
+            newCol = 0;
+            newRow = (row + 1) % gridSize;
+        }
+    }
+
+    if (direction === "left") {
+        newCol--;
+        if (newCol < 0) { // Wrap to previous row
+            newCol = gridSize - 1;
+            newRow = (row - 1 + gridSize) % gridSize;
+        }
+    }
+
+    if (direction === "down") {
+        newRow = (row + 1) % gridSize; // Wrap to top if at last row
+    }
+
+    if (direction === "up") {
+        newRow = (row - 1 + gridSize) % gridSize; // Wrap to bottom if at first row
+    }
+
+    const nextCell = document.querySelector(`[data-row="${newRow}"][data-col="${newCol}"]`);
+    if (nextCell) {
+        nextCell.focus();
+        setTimeout(() => setCaretToEnd(nextCell), 0);
+    }
+}
+
+// Function to set cursor at the end of the input field
+function setCaretToEnd(cell) {
+    const length = cell.value.length;
+    cell.focus();
+    cell.setSelectionRange(length, length);
 }

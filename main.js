@@ -10,7 +10,9 @@ window.onload = () => {
     cells[0].focus();
 }
 
-function generateGrid(){
+export function generateGrid(){
+    grid.innerHTML = "";
+
     grid.style.gridTemplateColumns = `repeat(${gridSize}, auto)`;
     grid.style.gridTemplateRows = `repeat(${gridSize}, auto)`;
     

@@ -1,5 +1,9 @@
+import { setGridSize } from "./config.js";
+import { generateGrid } from "./main.js";
+
 const slider = document.getElementById("slider");
 const output = document.getElementById("sliderValue");
+
 
 const validSizes = [2, 3, 4, 5, 6, 7].map(num => num * num);
 
@@ -24,7 +28,10 @@ function initializeSlider() {
 slider.addEventListener("input", () => {
     slider.value = getClosestValidSize(slider.value);
     output.textContent = `${slider.value} x ${slider.value}`;
+    setGridSize(slider.value);
+    generateGrid();
     updateSliderBackground();
 });
+
 
 initializeSlider();

@@ -168,11 +168,17 @@ input[type="range"]:disabled {
     gap: 0.6rem;
 }
 
-@media (max-width: 500px){
+@media (max-width: 400px){
+    :root {
+        font-size: 12px;
+    }
     .sudoku-cell {
-        width: 1rem;
-        height: 1rem;
-        font-size: 1.3rem;
+        width: 1.2rem;
+        height: 1.2rem;
+        font-size: 1rem;
+    }
+    .valid:hover, .invalid:hover{
+        border: 0.1rem solid var(--primary-color);
     }
 }
 
@@ -196,6 +202,9 @@ input[type="range"]:disabled {
     }
     button {
         padding: 0.5rem 0.6rem;
+    }
+    .valid:hover, .invalid:hover{
+        border: 0.1rem solid var(--primary-color);
     }
 }
 

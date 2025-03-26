@@ -4,17 +4,18 @@ import { gridSize } from "./config.js";
 import { cells } from "./config.js";
 
 const generateButton = document.getElementById("generateButton");
+const resetButton = document.getElementById("resetButton");
 
 generateButton.addEventListener("click", () => {
     generateSudoku("easy");
 })
 
+resetButton.addEventListener("click", () => {
+    resetGrid();
+})
+
 function generateSudoku(difficulty){
-    cellValues.forEach(row => row.fill(0));
-    cells.forEach((cell) => {
-        cell.value = "";
-        cell.readOnly = false; 
-    });
+    resetGrid();
 
     let clues = 
     difficulty === "easy" ? parseInt(gridSize*gridSize / 2):
@@ -46,5 +47,13 @@ function generateSudoku(difficulty){
             cell.value = value;
             cell.readOnly = true; 
         }
+    });
+}
+
+function resetGrid(){
+    cellValues.forEach(row => row.fill(0));
+    cells.forEach((cell) => {
+        cell.value = "";
+        cell.readOnly = false; 
     });
 }

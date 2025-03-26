@@ -1,8 +1,8 @@
-const grid = document.getElementById("sudoku-grid");
-const gridSize = 9;
-const subgridSize = Math.sqrt(gridSize);
-const cells = [];
-const cellValues = Array.from({length: gridSize}, () => Array(gridSize).fill(0));
+import { grid } from "./config.js";
+import { cells } from "./config.js";
+import { gridSize } from "./config.js";
+import { subgridSize } from "./config.js";
+import { cellValues } from "./config.js";
 
 window.onload = () => {
     generateGrid();
@@ -51,31 +51,29 @@ function generateGrid(){
                 cell.classList.add("top-border");
             }
 
-            // Handle arrow key navigation
             cell.addEventListener("keydown", function (event) {
                 if (event.key === "ArrowRight") moveFocus(row, col, "right");
                 if (event.key === "ArrowLeft") moveFocus(row, col, "left");
                 if (event.key === "ArrowUp") moveFocus(row, col, "up");
                 if (event.key === "ArrowDown") moveFocus(row, col, "down");
 
-                // Backspace moves focus left if the cell is empty
                 if (event.key === "Backspace" && this.value === "") {
                     moveFocus(row, col, "left");
                 }
             });
+
             grid.appendChild(cell);
             cells.push(cell); 
         }
     }
 }
 
-// Function to move focus based on direction with wrapping
 function moveFocus(row, col, direction) {
     let newRow = row, newCol = col;
 
     if (direction === "right") {
         newCol++;
-        if (newCol >= gridSize) { // Wrap to next row
+        if (newCol >= gridSize) {
             newCol = 0;
             newRow = (row + 1) % gridSize;
         }
@@ -83,18 +81,18 @@ function moveFocus(row, col, direction) {
 
     if (direction === "left") {
         newCol--;
-        if (newCol < 0) { // Wrap to previous row
+        if (newCol < 0) { 
             newCol = gridSize - 1;
             newRow = (row - 1 + gridSize) % gridSize;
         }
     }
 
     if (direction === "down") {
-        newRow = (row + 1) % gridSize; // Wrap to top if at last row
+        newRow = (row + 1) % gridSize; 
     }
 
     if (direction === "up") {
-        newRow = (row - 1 + gridSize) % gridSize; // Wrap to bottom if at first row
+        newRow = (row - 1 + gridSize) % gridSize;
     }
 
     const nextCell = document.querySelector(`[data-row="${newRow}"][data-col="${newCol}"]`);
@@ -104,7 +102,6 @@ function moveFocus(row, col, direction) {
     }
 }
 
-// Function to set cursor at the end of the input field
 function setCaretToEnd(cell) {
     const length = cell.value.length;
     cell.focus();

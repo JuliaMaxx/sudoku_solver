@@ -18,7 +18,6 @@ function generateGrid(){
             const cell = document.createElement("input");
             cell.classList.add("sudoku-cell");
             cell.type = "text"; 
-            cell.maxLength = 1; 
             cell.inputMode = "numeric"; 
             cell.pattern = "[1-9]"; 
             cell.dataset.row = row; 
@@ -26,14 +25,15 @@ function generateGrid(){
     
             cell.addEventListener("input", function () {
                 // Remove anything that is not 1-9
-                this.value = this.value.replace(/[^1-9]/g, ''); 
+                let newValue = this.value.replace(/[^1-9]/g, ''); 
                 
-                if (this.value.length === 1) {
+                if (newValue.length > 0) {
+                    this.value = newValue[newValue.length - 1];
                     // Find the next input and focus it
-                    const index = cells.indexOf(this);
-                    if (this.value.length === 1) {
-                        moveFocus(row, col, "right"); 
-                    }
+                    moveFocus(row, col, "right"); 
+                }
+                else{
+                    this.value = "";
                 }
             });
             

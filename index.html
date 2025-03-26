@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <script type="module" src="main.js" defer></script>
+    <<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+    <script defer type="module" src="ui.js"></script> 
     <title>Sudoku Solver</title>
 </head>
 <body>
+    <h1 class="title">Sudoku Solver</h1>
     <div class="sudoku-container">
         <div id="sudoku-grid"></div>
+    </div>
+    <div class="control-panel">
+        <div class="btn-menu">
+            <button>Solve</button>
+            <button>Solve self</button>
+            <button>Generate</button>
+            <button>Reset</button>
+        </div>
+        <input type="range" id="slider" min="4" max="48" value="9">
+        <span id="sliderValue">9x9</span>
     </div>
 </body>
 </html>

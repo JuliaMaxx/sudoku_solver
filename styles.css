@@ -2,6 +2,8 @@
     --primary-color: #16118b;
     --primary-color-transparent: #16118b84;
     --background-color: #f0f0f0;
+    --valid-color: rgb(28, 210, 28);
+    --invalid-color: rgb(231, 19, 19);
 }
 
 /* Fonts */
@@ -28,7 +30,7 @@ body {
 
 .title {
     font-family: "Amatic SC";
-    font-size: 6rem;
+    font-size: 5rem;
     margin: 0;
 }
 
@@ -48,7 +50,8 @@ button:active{
     box-shadow: inset 0.1rem 0.1rem 0.1rem 0.001rem black;
 }
 
-/* Slider */input[type="range"] {
+/* Slider */
+input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
@@ -90,7 +93,7 @@ input[type="range"]:disabled::-webkit-slider-runnable-track {
 #sliderValue {
     font-family: "Amatic SC";
     font-weight: 700;
-    font-size: 2.5rem;
+    font-size: 2rem;
     text-align: center;
 }
   
@@ -115,8 +118,8 @@ input[type="range"]:disabled::-webkit-slider-runnable-track {
 /* CELLS */
 .sudoku-cell {
     color: var(--primary-color);
-    width: 3rem;
-    height: 3rem;
+    width: 2.1rem;
+    height: 2.1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -147,16 +150,14 @@ input[type="range"]:disabled::-webkit-slider-runnable-track {
 }
 
 .valid:focus, .valid:hover {
-    border-color: rgb(55, 226, 55);
+    border-color: var(--valid-color);
 }
 
 .invalid:focus, .invalid:hover {
-    border-color: red;
-    box-shadow: 0.1rem 0.15rem 0.1rem 0.001rem rgba(0, 0, 0, 0.321);
+    border-color: var(--invalid-color);
 }
 
 /* Control Panel */
-
 .control-panel {
     display: flex;
     flex-direction: column;
@@ -168,4 +169,23 @@ input[type="range"]:disabled::-webkit-slider-runnable-track {
     display: flex;
     justify-content: space-between;
     gap: 0.6rem;
+}
+
+
+@media (max-width: 600px) {
+    body {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 2000px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 2000px) {
+    body {
+        font-size: 20px;
+    }
 }

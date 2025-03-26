@@ -45,7 +45,7 @@ body {
     font-size: 2rem;
     text-align: center;
     border-radius: 0.3rem;
-    border: 0.01rem solid var(--primary-color);
+    border: 0.1rem solid var(--primary-color);
     background-color: transparent;
     box-shadow: 0.1rem 0.1rem 0.1rem 0.001rem var(--primary-color-transparent);
 }
@@ -66,4 +66,12 @@ body {
 }
 .top-border{
     margin-top: 0.3rem;
+}
+
+.valid:focus, .valid:hover {
+    border-color: rgb(55, 226, 55);
+}
+
+.invalid:focus, .invalid:hover {
+    border-color: red;
 }

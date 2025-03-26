@@ -3,6 +3,7 @@ import { cells } from "./config.js";
 import { gridSize } from "./config.js";
 import { subgridSize } from "./config.js";
 import { cellValues } from "./config.js";
+import { validateCell } from "./config.js";
 
 window.onload = () => {
     generateGrid();
@@ -30,11 +31,22 @@ function generateGrid(){
                     const lastNumber =  newValue[newValue.length - 1]
                     this.value = lastNumber;
                     cellValues[row][col] = parseInt(lastNumber);
-                    moveFocus(row, col, "right"); 
+                    const valid = validateCell(row, col);
+
+                    if (valid){
+                        cell.classList.add("valid");
+                        cell.classList.remove("invalid");
+                        moveFocus(row, col, "right"); 
+                    } else {
+                        cell.classList.add("invalid");
+                        cell.classList.remove("valid");
+                    }
                 }
                 else{
                     this.value = "";
                     cellValues[row][col] = 0;
+                    cell.classList.remove("invalid");
+                    cell.classList.remove("valid");
                 }
             });
             

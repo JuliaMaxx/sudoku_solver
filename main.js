@@ -2,11 +2,11 @@ const grid = document.getElementById("sudoku-grid");
 const gridSize = 9;
 const subgridSize = Math.sqrt(gridSize);
 const cells = [];
+const cellValues = Array.from({length: gridSize}, () => Array(gridSize).fill(0));
 
 window.onload = () => {
     generateGrid();
     cells[0].focus();
-    
 }
 
 function generateGrid(){
@@ -24,16 +24,17 @@ function generateGrid(){
             cell.dataset.col = col; 
     
             cell.addEventListener("input", function () {
-                // Remove anything that is not 1-9
                 let newValue = this.value.replace(/[^1-9]/g, ''); 
-                
+
                 if (newValue.length > 0) {
-                    this.value = newValue[newValue.length - 1];
-                    // Find the next input and focus it
+                    const lastNumber =  newValue[newValue.length - 1]
+                    this.value = lastNumber;
+                    cellValues[row][col] = parseInt(lastNumber);
                     moveFocus(row, col, "right"); 
                 }
                 else{
                     this.value = "";
+                    cellValues[row][col] = 0;
                 }
             });
             

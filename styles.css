@@ -154,6 +154,10 @@ input[type="range"]:disabled {
     border-color: var(--invalid-color);
 }
 
+.sudoku-cell:not(:focus) {
+    border-color: var(--primary-color); 
+}
+
 /* Control Panel */
 .control-panel {
     display: flex;
@@ -173,8 +177,8 @@ input[type="range"]:disabled {
         font-size: 12px;
     }
     .sudoku-cell {
-        width: 1.2rem;
-        height: 1.2rem;
+        width: 1.3rem;
+        height: 1.3rem;
         font-size: 1rem;
     }
     .valid:hover, .invalid:hover{

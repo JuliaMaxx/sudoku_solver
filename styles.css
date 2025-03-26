@@ -36,6 +36,7 @@ body {
 
 /* BTN */
 button {
+    color: var(--primary-color);
     padding: 0.625rem 1.5625rem;
     font-size: 1rem;
     text-align: center;

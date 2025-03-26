@@ -1,7 +1,12 @@
+import { setGridSize } from "./config.js";
+import { generateGrid } from "./main.js";
+import { grid } from "./config.js";
+
 const slider = document.getElementById("slider");
 const output = document.getElementById("sliderValue");
 
-const validSizes = [2, 3, 4, 5, 6, 7].map(num => num * num);
+
+const validSizes = [2, 3, 4].map(num => num * num);
 
 function getClosestValidSize(value) {
     let closest = validSizes.reduce((prev, curr) => 
@@ -24,7 +29,11 @@ function initializeSlider() {
 slider.addEventListener("input", () => {
     slider.value = getClosestValidSize(slider.value);
     output.textContent = `${slider.value} x ${slider.value}`;
+    setGridSize(slider.value);
+    grid.innerHTML = "";
+    generateGrid();
     updateSliderBackground();
 });
+
 
 initializeSlider();

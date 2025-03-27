@@ -32,9 +32,9 @@ export function generateGrid(){
             }
             cell.dataset.row = row; 
             cell.dataset.col = col; 
-
             setTimeout(() => {
                 styleCell(cell)
+                cell.blur();
             }, 0)
     
             cell.addEventListener("input", handleCellInput);
@@ -230,7 +230,7 @@ function isMobile(){
 
 function zoomInOnFocus(cell){
     if(isMobile()) {
-        document.querySelector("meta[name='viewport']").setAttribute('content', 'width=device-width, initial-scale=1.5, maximum-scale=1.5, user-scalable=no');
+        document.querySelector("meta[name='viewport']").setAttribute('content', 'width=device-width, initial-scale=1.5, maximum-scale=1.5, user-scalable=yes');
 
         cell.scrollIntoView({
             behavior: 'smooth',  // Smooth scrolling

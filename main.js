@@ -173,6 +173,7 @@ function subgridSeparation(cell){
 }
 
 function removeHighlight(){
+    resetZoom();
     cells.forEach(cell => {
         cell.classList.remove("highlight-row", "highlight-col", "highlight-subgrid");
     });
@@ -184,6 +185,8 @@ function highlightRowColSubgrid(event) {
     const cell = event.target;
     const row = parseInt(cell.dataset.row);
     const col = parseInt(cell.dataset.col);
+
+    zoomInOnFocus(cell);
 
     // Highlight the entire row
     cells.forEach(cell => {
@@ -219,4 +222,26 @@ function highlightRowColSubgrid(event) {
             cell.classList.remove("highlight-subgrid");
         }
     });
+}
+
+function isMobile(){
+    return window.innerWidth <= 768;
+}
+
+function zoomInOnFocus(cell){
+    if(isMobile()) {
+        document.querySelector("meta[name='viewport']").setAttribute('content', 'width=device-width, initial-scale=1.5, maximum-scale=1.5, user-scalable=no');
+
+        cell.scrollIntoView({
+            behavior: 'smooth',  // Smooth scrolling
+            block: 'center',     // Vertically center the cell in the viewport
+            inline: 'center'     // Horizontally center the cell in the viewport
+        });
+    }
+}
+
+function resetZoom(){
+    if (isMobile()) {
+        document.querySelector("meta[name='viewport']").setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes');
+    }
 }

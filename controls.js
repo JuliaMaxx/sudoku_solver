@@ -3,17 +3,30 @@ import { validateCell } from "./config.js";
 import { gridSize } from "./config.js";
 import { cells } from "./config.js";
 
+const solveButton = document.getElementById("solveButton");
 const generateButton = document.getElementById("generateButton");
 const resetButton = document.getElementById("resetButton");
+const modal = document.getElementById("difficultyModal");
+const closeModalBtn = document.getElementById("closeModal");
+const difficultyButtons = document.querySelectorAll(".difficulty-btn");
 
+// solveButton.addEventListener("click", () => {
+//     solveSudoku();
+// })
 generateButton.addEventListener("click", () => {
-    generateSudoku("easy");
+    // generateSudoku("easy");
+    modal.style.display = "flex";
 })
 
 resetButton.addEventListener("click", () => {
     resetGrid();
 })
+// SOLVE
+// function solveSudoku{
 
+// }
+
+// GENERATE
 function generateSudoku(difficulty){
     resetGrid();
 
@@ -50,6 +63,7 @@ function generateSudoku(difficulty){
     });
 }
 
+// RESET
 function resetGrid(){
     cellValues.forEach(row => row.fill(0));
     cells.forEach((cell) => {
@@ -57,3 +71,15 @@ function resetGrid(){
         cell.readOnly = false; 
     });
 }
+
+closeModalBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+difficultyButtons.forEach(button => {
+    button.addEventListener("click", (event) => {
+        const level = event.target.getAttribute("data-level");
+        generateSudoku(level)
+        modal.style.display = "none";
+    });
+});

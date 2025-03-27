@@ -26,6 +26,10 @@ body {
     align-items: center;
     height: 100vh;
     background-color: var(--background-color);
+    background-image: url(background3.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     margin: 0;
     box-sizing: border-box;
     color: var(--primary-color);
@@ -295,7 +299,7 @@ button:active{
 }
 
 #theme1{
-    background: pink;
+    background: #F2C4DA;
 }
 #theme2{
     background: #F2E8DF;

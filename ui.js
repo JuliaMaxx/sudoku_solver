@@ -15,7 +15,7 @@ buttonSize4.addEventListener('click', () => handleSizeButtonClick(4));
 buttonSize9.addEventListener('click', () => handleSizeButtonClick(9));
 buttonSize16.addEventListener('click', () => handleSizeButtonClick(16));
 
-theme1.addEventListener('click', (event) => handleTheme(event, '#000000', 'pink'))
+theme1.addEventListener('click', (event) => handleTheme(event, '#000000', '#F2C4DA'))
 theme2.addEventListener('click', (event) => handleTheme(event, '#000000', '#F2E8DF'))
 theme3.addEventListener('click', (event) => handleTheme(event, '#e2a75e','#472f17'))
 theme4.addEventListener('click', (event) => handleTheme(event, '#ba7ee2','#140126'))

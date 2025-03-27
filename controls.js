@@ -1,4 +1,4 @@
-import { cellValues, resetCells } from "./config.js";
+import { cellValues, grid, resetCells } from "./config.js";
 import { validateCell } from "./config.js";
 import { gridSize } from "./config.js";
 import { cells } from "./config.js";
@@ -10,6 +10,20 @@ const resetButton = document.getElementById("resetButton");
 const modal = document.getElementById("difficultyModal");
 const closeModalBtn = document.getElementById("closeModal");
 const difficultyButtons = document.querySelectorAll(".difficulty-btn");
+
+solveButton.addEventListener("click", () => {
+    solveSudoku();
+    cells.forEach((cell) => {
+        let row = parseInt(cell.dataset.row);
+        let col = parseInt(cell.dataset.col);
+        let value = cellValues[row][col];
+    
+        if (value !== 0) {
+            cell.value = value;
+        }
+    });
+    }
+)
 
 generateButton.addEventListener("click", () => {
     modal.style.display = "flex";
@@ -68,6 +82,18 @@ function generateSudoku(difficulty){
     });
 }
 
+closeModalBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+difficultyButtons.forEach(button => {
+    button.addEventListener("click", (event) => {
+        const level = event.target.getAttribute("data-level");
+        generateSudoku(level)
+        modal.style.display = "none";
+    });
+});
+
 // RESET
 function resetGrid(){
     initializeCellValues();
@@ -80,14 +106,40 @@ function resetGrid(){
     });
 }
 
-closeModalBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-});
+// SOLVE
+function findNextEmptyCell() {
+    for (let row = 0; row < gridSize; row++) {
+        for (let col = 0; col < gridSize; col++) {
+            if (cellValues[row][col] === 0) return [row, col];
+        }
+    }
+    return null;
+}
 
-difficultyButtons.forEach(button => {
-    button.addEventListener("click", (event) => {
-        const level = event.target.getAttribute("data-level");
-        generateSudoku(level)
-        modal.style.display = "none";
-    });
-});
+function solveSudoku() {
+    const emptyCell = findNextEmptyCell();
+    if (!emptyCell) return true;
+
+    const [row, col] = emptyCell;
+    const possibleNumbers = getPossibleValues();
+
+    for (let num of possibleNumbers) {
+        cellValues[row][col] = num;
+
+        if (validateCell(row, col)) {
+            if (solveSudoku()) return true;
+
+            cellValues[row][col] = 0;
+        } else {
+            cellValues[row][col] = 0;
+        }
+    }
+    return false;
+}
+
+function getPossibleValues() {
+    if (gridSize === 16) {
+        return ["1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G"];
+    }
+    return [...Array(gridSize)].map((_, i) => (i + 1).toString()); 
+}

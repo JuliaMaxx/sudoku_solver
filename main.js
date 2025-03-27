@@ -233,7 +233,6 @@ function zoomInOnFocus(cell){
         document.querySelector("meta[name='viewport']").setAttribute('content', 'width=device-width, initial-scale=1.5, maximum-scale=1.5, user-scalable=yes');
 
         cell.scrollIntoView({
-            behavior: 'smooth',  // Smooth scrolling
             block: 'center',     // Vertically center the cell in the viewport
             inline: 'center'     // Horizontally center the cell in the viewport
         });

@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #16118b;
-    --primary-color-transparent: #16118b84;
-    --background-color: #f0f0f0;
+    --primary-color: #000000;
+    --primary-color-transparent: #00000084;
+    --background-color: #F2E8DF;
     --valid-color: rgb(28, 210, 28);
     --invalid-color: rgb(231, 19, 19);
     font-size: 16px;
@@ -262,4 +262,44 @@ button:active{
 
 .highlight-subgrid {
     background-color: rgba(255, 255, 0, 0.3);  /* Light yellow for subgrid */
+}
+
+
+/* THEMES */
+.theme-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.theme {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0.1rem solid var(--primary-color);
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.theme.selected{
+    border-radius: 10%;
+}
+
+.theme:hover {
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+#blackPink{
+    background: pink;
+}
+#blackWhite{
+    background: #F2E8DF;
+}
+#blackYellow{
+    background: #fec279;
+}
+#blackPurple{
+    background: #D2A2F2;
 }

@@ -40,7 +40,7 @@ function generateSudoku(difficulty){
         if (gridSize === 16){
             const isLetter = Math.random() < 0.5;
             num = isLetter? 
-            String.fromCharCode(Math.floor(Math.random() * 6) + 65): 
+            String.fromCharCode(Math.floor(Math.random() * 7) + 65): 
             Math.floor(Math.random() * 9) + 1;
         } else {
             num = Math.floor(Math.random() * gridSize) + 1;

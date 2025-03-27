@@ -111,8 +111,8 @@ input[type="range"]:disabled {
     display: grid;
     padding: 1rem;
     gap: 0.3rem;
-    width: 27rem;
-    height: 27rem;
+    width: 28rem;
+    height: 28rem;
     border-radius: 1rem;
     border: 0.2rem solid var(--primary-color);
 }
@@ -138,16 +138,16 @@ input[type="range"]:disabled {
 }
 
 .right-border{
-    margin-right: 0.3rem;
+    margin-right: 0.2rem;
 }
 .left-border{
-    margin-left: 0.3rem;
+    margin-left: 0.2rem;
 }
 .bottom-border{
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
 }
 .top-border{
-    margin-top: 0.3rem;
+    margin-top: 0.2rem;
 }
 
 .valid:focus, .valid:hover {

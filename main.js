@@ -26,7 +26,7 @@ export function generateGrid(){
             cell.dataset.row = row; 
             cell.dataset.col = col; 
             setTimeout(() => {
-                cell.style.fontSize = `${cell.clientWidth * 0.6}px`; 
+                styleCell(cell)
             }, 0)
     
             cell.addEventListener("input", function () {
@@ -127,4 +127,18 @@ function setCaretToEnd(cell) {
     const length = cell.value.length;
     cell.focus();
     cell.setSelectionRange(length, length);
+}
+
+function styleCell(cell){
+    if (gridSize == 16){
+        cell.style.fontSize = `${cell.clientWidth * 0.9}px`; 
+        grid.style.gap = "0.1rem";
+        cell.style.boxShadow = "0.001rem 0.001rem 0.01rem 0.001rem var(--primary-color-transparent);"
+    } else if (gridSize == 9){
+        cell.style.fontSize = `${cell.clientWidth * 0.6}px`; 
+        grid.style.gap = "0.3rem";
+    } else {
+        cell.style.fontSize = `${cell.clientWidth * 0.5}px`; 
+        grid.style.gap = "0.3rem";
+    }
 }

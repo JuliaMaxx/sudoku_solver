@@ -25,59 +25,14 @@ export function generateGrid(){
             cell.pattern = "[1-9]"; 
             cell.dataset.row = row; 
             cell.dataset.col = col; 
+
             setTimeout(() => {
                 styleCell(cell)
             }, 0)
     
-            cell.addEventListener("input", function () {
-                let newValue = this.value.replace(/[^1-9]/g, ''); 
-
-                if (newValue.length > 0) {
-                    const lastNumber =  newValue[newValue.length - 1]
-                    this.value = lastNumber;
-                    cellValues[row][col] = parseInt(lastNumber);
-                    const valid = validateCell(row, col);
-
-                    if (valid){
-                        cell.classList.add("valid");
-                        cell.classList.remove("invalid");
-                        moveFocus(row, col, "right"); 
-                    } else {
-                        cell.classList.add("invalid");
-                        cell.classList.remove("valid");
-                    }
-                }
-                else{
-                    this.value = "";
-                    cellValues[row][col] = 0;
-                    cell.classList.remove("invalid");
-                    cell.classList.remove("valid");
-                }
-            });
-            
-            if (col % subgridSize === subgridSize - 1) {
-                cell.classList.add("right-border");
-            }
-            if (row % subgridSize === subgridSize - 1) {
-                cell.classList.add("bottom-border");
-            }
-            if (col % subgridSize === 0) {
-                cell.classList.add("left-border");
-            }
-            if (row % subgridSize === 0) {
-                cell.classList.add("top-border");
-            }
-
-            cell.addEventListener("keydown", function (event) {
-                if (event.key === "ArrowRight") moveFocus(row, col, "right");
-                if (event.key === "ArrowLeft") moveFocus(row, col, "left");
-                if (event.key === "ArrowUp") moveFocus(row, col, "up");
-                if (event.key === "ArrowDown") moveFocus(row, col, "down");
-
-                if (event.key === "Backspace" && this.value === "") {
-                    moveFocus(row, col, "left");
-                }
-            });
+            cell.addEventListener("input", handleCellInput);
+            subgridSeparation(cell);
+            cell.addEventListener("keydown", handleCellKeyDown);
 
             grid.appendChild(cell);
             cells.push(cell); 
@@ -122,7 +77,6 @@ function moveFocus(row, col, direction) {
     }
 }
 
-
 function setCaretToEnd(cell) {
     const length = cell.value.length;
     cell.focus();
@@ -140,5 +94,68 @@ function styleCell(cell){
     } else {
         cell.style.fontSize = `${cell.clientWidth * 0.5}px`; 
         grid.style.gap = "0.3rem";
+    }
+}
+
+function handleCellInput(event){
+    const cell = event.target;
+    const row = parseInt(cell.dataset.row);
+    const col = parseInt(cell.dataset.col);
+
+    let newValue = cell.value.replace(/[^1-9]/g, ''); 
+
+    if (newValue.length > 0) {
+        const lastNumber =  newValue[newValue.length - 1]
+        cell.value = lastNumber;
+        cellValues[row][col] = parseInt(lastNumber);
+        const valid = validateCell(row, col);
+
+        if (valid){
+            cell.classList.add("valid");
+            cell.classList.remove("invalid");
+            moveFocus(row, col, "right"); 
+        } else {
+            cell.classList.add("invalid");
+            cell.classList.remove("valid");
+        }
+    }
+    else{
+        cancelIdleCallback.value = "";
+        cellValues[row][col] = 0;
+        cell.classList.remove("invalid");
+        cell.classList.remove("valid");
+    }
+}
+
+function handleCellKeyDown(event){
+    const cell = event.target;
+    const row = parseInt(cell.dataset.row);
+    const col = parseInt(cell.dataset.col);
+
+    if (event.key === "ArrowRight") moveFocus(row, col, "right");
+    if (event.key === "ArrowLeft") moveFocus(row, col, "left");
+    if (event.key === "ArrowUp") moveFocus(row, col, "up");
+    if (event.key === "ArrowDown") moveFocus(row, col, "down");
+
+    if (event.key === "Backspace" && cell.value === "") {
+        moveFocus(row, col, "left");
+    }
+}
+
+function subgridSeparation(cell){
+    const row = parseInt(cell.dataset.row);
+    const col = parseInt(cell.dataset.col);
+
+    if (col % subgridSize === subgridSize - 1) {
+        cell.classList.add("right-border");
+    }
+    if (row % subgridSize === subgridSize - 1) {
+        cell.classList.add("bottom-border");
+    }
+    if (col % subgridSize === 0) {
+        cell.classList.add("left-border");
+    }
+    if (row % subgridSize === 0) {
+        cell.classList.add("top-border");
     }
 }

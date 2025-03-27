@@ -38,7 +38,8 @@ export function generateGrid(){
             }, 0)
     
             cell.addEventListener("input", handleCellInput);
-            cell.addEventListener("focus", highlightRowColSubgrid)
+            cell.addEventListener("focus", highlightRowColSubgrid);
+            cell.addEventListener("blur", removeHighlight);
             subgridSeparation(cell);
             cell.addEventListener("keydown", handleCellKeyDown);
 
@@ -169,6 +170,13 @@ function subgridSeparation(cell){
     if (row % subgridSize === 0) {
         cell.classList.add("top-border");
     }
+}
+
+function removeHighlight(){
+    cells.forEach(cell => {
+        cell.classList.remove("highlight-row", "highlight-col", "highlight-subgrid");
+    });
+    return;
 }
 
 

@@ -4,6 +4,9 @@
     --background-color: #F2E8DF;
     --valid-color: rgb(28, 210, 28);
     --invalid-color: rgb(231, 19, 19);
+    --row-highlight: rgba(56, 255, 56, 0.3);
+    --col-highlight: rgba(65, 65, 255, 0.3);
+    --subgrid-highlight: rgba(255, 255, 62, 0.3);
     font-size: 16px;
 }
 
@@ -253,15 +256,15 @@ button:active{
 
 /* HIGHLIGHT */
 .highlight-row {
-    background-color: rgba(0, 255, 0, 0.3);  /* Light green for row */
+    background-color: var(--row-highlight);  /* Light green for row */
 }
 
 .highlight-col {
-    background-color: rgba(0, 0, 255, 0.3);  /* Light blue for column */
+    background-color: var(--col-highlight)  /* Light blue for column */
 }
 
 .highlight-subgrid {
-    background-color: rgba(255, 255, 0, 0.3);  /* Light yellow for subgrid */
+    background-color: var(--subgrid-highlight);  /* Light yellow for subgrid */
 }
 
 
@@ -291,15 +294,15 @@ button:active{
     cursor: pointer;
 }
 
-#blackPink{
+#theme1{
     background: pink;
 }
-#blackWhite{
+#theme2{
     background: #F2E8DF;
 }
-#blackYellow{
-    background: #fec279;
+#theme3{
+    background: #472f17;
 }
-#blackPurple{
-    background: #D2A2F2;
+#theme4{
+    background: #140126;
 }

@@ -1,4 +1,4 @@
-import { cellValues } from "./config.js";
+import { cellValues, resetCells } from "./config.js";
 import { validateCell } from "./config.js";
 import { gridSize } from "./config.js";
 import { cells } from "./config.js";
@@ -45,7 +45,7 @@ function generateSudoku(difficulty){
         } else {
             num = Math.floor(Math.random() * gridSize) + 1;
         }
-        
+
         if (cellValues[row][col] === 0){
             cellValues[row][col] = num;
             if (!validateCell(row, col)){
@@ -73,6 +73,8 @@ function resetGrid(){
     initializeCellValues();
     cellValues.forEach(row => row.fill(0));
     cells.forEach((cell) => {
+        cell.classList.remove('valid');
+        cell.classList.remove('invalid');
         cell.value = "";
         cell.readOnly = false; 
     });

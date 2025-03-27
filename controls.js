@@ -24,18 +24,28 @@ function generateSudoku(difficulty){
     if (!cellValues || !Array.isArray(cellValues) || cellValues.length !== gridSize) {
         initializeCellValues();
     }
-    
     resetGrid();
+
     let clues = 
     difficulty === "easy" ? parseInt(gridSize*gridSize / 2):
     difficulty === "medium" ? parseInt(gridSize*gridSize / 3):
     parseInt(gridSize*gridSize / 4)
     
     let placed = 0;
+
     while (placed < clues){
         let row = Math.floor(Math.random() * gridSize);
         let col = Math.floor(Math.random() * gridSize);
-        let num = Math.floor(Math.random() * gridSize) + 1;
+        let num;
+        if (gridSize === 16){
+            const isLetter = Math.random() < 0.5;
+            num = isLetter? 
+            String.fromCharCode(Math.floor(Math.random() * 6) + 65): 
+            Math.floor(Math.random() * 9) + 1;
+        } else {
+            num = Math.floor(Math.random() * gridSize) + 1;
+        }
+        
         if (cellValues[row][col] === 0){
             cellValues[row][col] = num;
             if (!validateCell(row, col)){

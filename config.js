@@ -14,32 +14,36 @@ export function resetCells() {
 }
 
 export function setGridSize(newSize) {
-    resetCells();
-    initializeCellValues();
     gridSize = newSize;
     subgridSize = Math.sqrt(gridSize);
+    resetCells();
+    initializeCellValues();
 }
 
-export function validateCell(row, col){
-    const cellVal = cellValues[row][col];
-    if (cellVal !== 0){
-        // row & col check
-        for (let i = 0; i < gridSize; i++) {
-            if (i !== col && cellValues[row][i] === cellVal) return false; 
-            if (i !== row && cellValues[i][col] === cellVal) return false; 
-        }
-        
-        // subgrid check
-        const subgridRowStart = Math.floor(row / subgridSize) * subgridSize;
-        const subgridColStart = Math.floor(col / subgridSize) * subgridSize;
+export function validateCell(row, col) {
+    let cellVal = cellValues[row][col];
 
-        for (let r = subgridRowStart; r < subgridRowStart + subgridSize; r++) {
-            for (let c = subgridColStart; c < subgridColStart + subgridSize; c++) {
-                if ((r !== row || c !== col) && cellValues[r][c] === cellVal) {
-                    return false;
-                }
+    if (!cellVal || cellVal === 0) return true;  
+
+    if (gridSize === 16 && typeof cellVal === "string") {
+        cellVal = cellVal.toUpperCase();
+    }
+
+    for (let i = 0; i < gridSize; i++) {
+        if (i !== col && cellValues[row][i] === cellVal) return false;
+        if (i !== row && cellValues[i][col] === cellVal) return false;
+    }
+
+    const subgridRowStart = Math.floor(row / subgridSize) * subgridSize;
+    const subgridColStart = Math.floor(col / subgridSize) * subgridSize;
+
+    for (let r = subgridRowStart; r < subgridRowStart + subgridSize; r++) {
+        for (let c = subgridColStart; c < subgridColStart + subgridSize; c++) {
+            if ((r !== row || c !== col) && cellValues[r][c] === cellVal) {
+                return false;
             }
         }
     }
+
     return true;
 }

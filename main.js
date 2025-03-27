@@ -4,14 +4,18 @@ import { gridSize } from "./config.js";
 import { subgridSize } from "./config.js";
 import { cellValues } from "./config.js";
 import { validateCell } from "./config.js";
+import { setGridSize } from "./config.js";
+import { resetCells } from "./config.js";
 
 window.onload = () => {
+    setGridSize(9);
     generateGrid();
     cells[0].focus();
 }
 
 export function generateGrid(){
     grid.innerHTML = "";
+    resetCells();
 
     grid.style.gridTemplateColumns = `repeat(${gridSize}, auto)`;
     grid.style.gridTemplateRows = `repeat(${gridSize}, auto)`;
@@ -21,8 +25,11 @@ export function generateGrid(){
             const cell = document.createElement("input");
             cell.classList.add("sudoku-cell");
             cell.type = "text"; 
-            cell.inputMode = "numeric"; 
-            cell.pattern = `[1-${gridSize}]`; 
+            if (gridSize === 16) {
+                cell.inputMode = "text"; 
+            } else {
+                cell.inputMode = "numeric"; 
+            }
             cell.dataset.row = row; 
             cell.dataset.col = col; 
 
@@ -102,14 +109,15 @@ function handleCellInput(event){
     const row = parseInt(cell.dataset.row);
     const col = parseInt(cell.dataset.col);
 
-    let regex = new RegExp(`[^1-${gridSize}]`, "g");
+    let regex = gridSize === 16 ? /[^1-9A-Fa-f]/g : new RegExp(`[^1-${gridSize}]`, "g");
 
     let newValue = cell.value.replace(regex, ''); 
 
     if (newValue.length > 0) {
-        const lastNumber =  newValue[newValue.length - 1]
-        cell.value = lastNumber;
-        cellValues[row][col] = parseInt(lastNumber);
+        const lastCharacter=  newValue.slice(-1).toUpperCase();
+        cell.value = lastCharacter;
+
+        cellValues[row][col] = gridSize === 16 ? parseInt(lastCharacter, 16) : parseInt(lastCharacter);
         const valid = validateCell(row, col);
 
         if (valid){
@@ -122,7 +130,7 @@ function handleCellInput(event){
         }
     }
     else{
-        cancelIdleCallback.value = "";
+        cell.value = "";
         cellValues[row][col] = 0;
         cell.classList.remove("invalid");
         cell.classList.remove("valid");

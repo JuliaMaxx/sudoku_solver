@@ -3,8 +3,19 @@ export const grid = document.getElementById("sudoku-grid");
 export let gridSize = 9;
 export let subgridSize = Math.sqrt(gridSize);
 export let cells = [];
-export let cellValues = Array.from({length: gridSize}, () => Array(gridSize).fill(0));
+export let cellValues;
+
+export function initializeCellValues() {
+    cellValues = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
+}
+
+export function resetCells() {
+    cells = [];
+}
+
 export function setGridSize(newSize) {
+    resetCells();
+    initializeCellValues();
     gridSize = newSize;
     subgridSize = Math.sqrt(gridSize);
 }

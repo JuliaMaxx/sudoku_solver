@@ -22,7 +22,7 @@ export function generateGrid(){
             cell.classList.add("sudoku-cell");
             cell.type = "text"; 
             cell.inputMode = "numeric"; 
-            cell.pattern = "[1-9]"; 
+            cell.pattern = `[1-${gridSize}]`; 
             cell.dataset.row = row; 
             cell.dataset.col = col; 
 
@@ -85,9 +85,9 @@ function setCaretToEnd(cell) {
 
 function styleCell(cell){
     if (gridSize == 16){
-        cell.style.fontSize = `${cell.clientWidth * 0.9}px`; 
-        grid.style.gap = "0.1rem";
-        cell.style.boxShadow = "0.001rem 0.001rem 0.01rem 0.001rem var(--primary-color-transparent);"
+        cell.style.fontSize = `${cell.clientWidth * 0.8}px`; 
+        grid.style.gap = "0.07rem";
+        cell.style.boxShadow = "0.001rem 0.001rem 0.001rem 0.001rem var(--primary-color-transparent);"
     } else if (gridSize == 9){
         cell.style.fontSize = `${cell.clientWidth * 0.6}px`; 
         grid.style.gap = "0.3rem";
@@ -102,7 +102,9 @@ function handleCellInput(event){
     const row = parseInt(cell.dataset.row);
     const col = parseInt(cell.dataset.col);
 
-    let newValue = cell.value.replace(/[^1-9]/g, ''); 
+    let regex = new RegExp(`[^1-${gridSize}]`, "g");
+
+    let newValue = cell.value.replace(regex, ''); 
 
     if (newValue.length > 0) {
         const lastNumber =  newValue[newValue.length - 1]

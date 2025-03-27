@@ -2,6 +2,7 @@ import { cellValues } from "./config.js";
 import { validateCell } from "./config.js";
 import { gridSize } from "./config.js";
 import { cells } from "./config.js";
+import { initializeCellValues } from "./config.js";
 
 const solveButton = document.getElementById("solveButton");
 const generateButton = document.getElementById("generateButton");
@@ -10,37 +11,31 @@ const modal = document.getElementById("difficultyModal");
 const closeModalBtn = document.getElementById("closeModal");
 const difficultyButtons = document.querySelectorAll(".difficulty-btn");
 
-// solveButton.addEventListener("click", () => {
-//     solveSudoku();
-// })
 generateButton.addEventListener("click", () => {
-    // generateSudoku("easy");
     modal.style.display = "flex";
 })
 
 resetButton.addEventListener("click", () => {
     resetGrid();
 })
-// SOLVE
-// function solveSudoku{
-
-// }
 
 // GENERATE
 function generateSudoku(difficulty){
+    if (!cellValues || !Array.isArray(cellValues) || cellValues.length !== gridSize) {
+        initializeCellValues();
+    }
+    
     resetGrid();
-
     let clues = 
     difficulty === "easy" ? parseInt(gridSize*gridSize / 2):
     difficulty === "medium" ? parseInt(gridSize*gridSize / 3):
     parseInt(gridSize*gridSize / 4)
-
+    
     let placed = 0;
     while (placed < clues){
-        let row = Math.floor(Math.random() * 9);
-        let col = Math.floor(Math.random() * 9);
-        let num = Math.floor(Math.random() * 9) + 1;
-
+        let row = Math.floor(Math.random() * gridSize);
+        let col = Math.floor(Math.random() * gridSize);
+        let num = Math.floor(Math.random() * gridSize) + 1;
         if (cellValues[row][col] === 0){
             cellValues[row][col] = num;
             if (!validateCell(row, col)){
@@ -50,10 +45,10 @@ function generateSudoku(difficulty){
             }
         }
     }
-
+    
     cells.forEach((cell) => {
-        let row = cell.dataset.row;
-        let col = cell.dataset.col;
+        let row = parseInt(cell.dataset.row);
+        let col = parseInt(cell.dataset.col);
         let value = cellValues[row][col];
 
         if (value !== 0) {
@@ -65,6 +60,7 @@ function generateSudoku(difficulty){
 
 // RESET
 function resetGrid(){
+    initializeCellValues();
     cellValues.forEach(row => row.fill(0));
     cells.forEach((cell) => {
         cell.value = "";

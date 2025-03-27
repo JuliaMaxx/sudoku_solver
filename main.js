@@ -111,7 +111,7 @@ function handleCellInput(event){
     const row = parseInt(cell.dataset.row);
     const col = parseInt(cell.dataset.col);
 
-    let regex = gridSize === 16 ? /[^1-9A-Ga-g]/g : new RegExp(`[^1-${gridSize}]`, "g");
+    let regex = gridSize === 16 ? /[^1-9A-G]/gi : new RegExp(`[^1-${gridSize}]`, "g");
 
     let newValue = cell.value.replace(regex, ''); 
 
@@ -119,7 +119,7 @@ function handleCellInput(event){
         const lastCharacter=  newValue.slice(-1).toUpperCase();
         cell.value = lastCharacter;
 
-        cellValues[row][col] = gridSize === 16 ? parseInt(lastCharacter, 16) : parseInt(lastCharacter);
+        cellValues[row][col] = gridSize === 16 ? parseInt(lastCharacter, 17) : parseInt(lastCharacter);
         const valid = validateCell(row, col);
 
         if (valid){

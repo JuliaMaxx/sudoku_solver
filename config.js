@@ -25,10 +25,6 @@ export function validateCell(row, col) {
 
     if (!cellVal || cellVal === 0) return true;  
 
-    if (gridSize === 16 && typeof cellVal === "string") {
-        cellVal = cellVal.toUpperCase();
-    }
-
     for (let i = 0; i < gridSize; i++) {
         if (i !== col && cellValues[row][i] === cellVal) return false;
         if (i !== row && cellValues[i][col] === cellVal) return false;

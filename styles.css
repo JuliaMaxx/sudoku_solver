@@ -110,6 +110,7 @@ button:active{
     border: 0.1rem solid var(--primary-color);
     background-color: transparent;
     box-shadow: 0.1rem 0.1rem 0.1rem 0.001rem var(--primary-color-transparent);
+    transition: all 0.1s;
 }
 
 .sudoku-cell:focus{
@@ -130,16 +131,12 @@ button:active{
     margin-top: 0.2rem;
 }
 
-.valid:focus, .valid:hover {
+.valid:focus{
     border-color: var(--valid-color);
 }
 
-.invalid:focus, .invalid:hover {
+.invalid:focus {
     border-color: var(--invalid-color);
-}
-
-.sudoku-cell:not(:focus) {
-    border-color: var(--primary-color); 
 }
 
 /* Control Panel */
@@ -252,4 +249,17 @@ button:active{
 
 .close-x:hover {
     color: var(--primary-color-transparent);
+}
+
+/* HIGHLIGHT */
+.highlight-row {
+    background-color: rgba(0, 255, 0, 0.3);  /* Light green for row */
+}
+
+.highlight-col {
+    background-color: rgba(0, 0, 255, 0.3);  /* Light blue for column */
+}
+
+.highlight-subgrid {
+    background-color: rgba(255, 255, 0, 0.3);  /* Light yellow for subgrid */
 }

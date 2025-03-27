@@ -38,6 +38,7 @@ export function generateGrid(){
             }, 0)
     
             cell.addEventListener("input", handleCellInput);
+            cell.addEventListener("focus", highlightRowColSubgrid)
             subgridSeparation(cell);
             cell.addEventListener("keydown", handleCellKeyDown);
 
@@ -168,4 +169,46 @@ function subgridSeparation(cell){
     if (row % subgridSize === 0) {
         cell.classList.add("top-border");
     }
+}
+
+
+function highlightRowColSubgrid(event) {
+    const cell = event.target;
+    const row = parseInt(cell.dataset.row);
+    const col = parseInt(cell.dataset.col);
+
+    // Highlight the entire row
+    cells.forEach(cell => {
+        const cellRow = parseInt(cell.dataset.row);
+        if (cellRow === row) {
+            cell.classList.add("highlight-row");
+        } else {
+            cell.classList.remove("highlight-row");
+        }
+    });
+
+    // Highlight the entire column
+    cells.forEach(cell => {
+        const cellCol = parseInt(cell.dataset.col);
+        if (cellCol === col) {
+            cell.classList.add("highlight-col");
+        } else {
+            cell.classList.remove("highlight-col");
+        }
+    });
+
+    // Highlight the subgrid
+    const subgridRowStart = Math.floor(row / subgridSize) * subgridSize;
+    const subgridColStart = Math.floor(col / subgridSize) * subgridSize;
+
+    cells.forEach(cell => {
+        const cellRow = parseInt(cell.dataset.row);
+        const cellCol = parseInt(cell.dataset.col);
+        if (cellRow >= subgridRowStart && cellRow < subgridRowStart + subgridSize &&
+            cellCol >= subgridColStart && cellCol < subgridColStart + subgridSize) {
+            cell.classList.add("highlight-subgrid");
+        } else {
+            cell.classList.remove("highlight-subgrid");
+        }
+    });
 }

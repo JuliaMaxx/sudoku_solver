@@ -1,4 +1,4 @@
-import { cellValues, grid, resetCells } from "./config.js";
+import { cellValues } from "./config.js";
 import { validateCell } from "./config.js";
 import { gridSize } from "./config.js";
 import { cells } from "./config.js";
@@ -17,7 +17,7 @@ solveButton.addEventListener("click", () => {
         let row = parseInt(cell.dataset.row);
         let col = parseInt(cell.dataset.col);
         let value = cellValues[row][col];
-    
+        value = value > 9? String.fromCharCode(value + 55) : value;
         if (value !== 0) {
             cell.value = value;
         }
@@ -50,15 +50,7 @@ function generateSudoku(difficulty){
     while (placed < clues){
         let row = Math.floor(Math.random() * gridSize);
         let col = Math.floor(Math.random() * gridSize);
-        let num;
-        if (gridSize === 16){
-            const isLetter = Math.random() < 0.5;
-            num = isLetter? 
-            String.fromCharCode(Math.floor(Math.random() * 7) + 65): 
-            Math.floor(Math.random() * 9) + 1;
-        } else {
-            num = Math.floor(Math.random() * gridSize) + 1;
-        }
+        let num = Math.floor(Math.random() * gridSize) + 1;
 
         if (cellValues[row][col] === 0){
             cellValues[row][col] = num;
@@ -74,6 +66,7 @@ function generateSudoku(difficulty){
         let row = parseInt(cell.dataset.row);
         let col = parseInt(cell.dataset.col);
         let value = cellValues[row][col];
+        value = value > 9? String.fromCharCode(value + 55) : value;
 
         if (value !== 0) {
             cell.value = value;
@@ -121,7 +114,7 @@ function solveSudoku() {
     if (!emptyCell) return true;
 
     const [row, col] = emptyCell;
-    const possibleNumbers = getPossibleValues();
+    const possibleNumbers =  [...Array(gridSize)].map((_, i) => (i + 1));
 
     for (let num of possibleNumbers) {
         cellValues[row][col] = num;
@@ -135,11 +128,4 @@ function solveSudoku() {
         }
     }
     return false;
-}
-
-function getPossibleValues() {
-    if (gridSize === 16) {
-        return ["1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G"];
-    }
-    return [...Array(gridSize)].map((_, i) => (i + 1).toString()); 
 }

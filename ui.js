@@ -17,7 +17,7 @@ buttonSize16.addEventListener('click', () => handleSizeButtonClick(16));
 
 theme1.addEventListener('click', (event) => handleTheme(event, '#000000', '#F2C4DA'))
 theme2.addEventListener('click', (event) => handleTheme(event, '#000000', '#F2E8DF'))
-theme3.addEventListener('click', (event) => handleTheme(event, '#e2a75e','#472f17'))
+theme3.addEventListener('click', (event) => handleTheme(event, '#e2a75e','#003c00'))
 theme4.addEventListener('click', (event) => handleTheme(event, '#ba7ee2','#140126'))
 
 
@@ -33,9 +33,9 @@ function handleTheme(event, primaryColor, secondaryColor){
         document.documentElement.style.setProperty('--col-highlight', 'rgba(65, 65, 255, 0.3)');
         document.documentElement.style.setProperty('--subgrid-highlight', 'rgba(255, 255, 62, 0.3)');
     } else {
-        document.documentElement.style.setProperty('--row-highlight', 'rgba(0, 78, 0, 0.3)');
-        document.documentElement.style.setProperty('--col-highlight', 'rgba(92, 0, 29, 0.3)');
-        document.documentElement.style.setProperty('--subgrid-highlight', 'rgba(76, 80, 0, 0.3)');
+        document.documentElement.style.setProperty('--row-highlight', 'rgba(0, 154, 0, 0.3)');
+        document.documentElement.style.setProperty('--col-highlight', 'rgba(160, 0, 51, 0.3)');
+        document.documentElement.style.setProperty('--subgrid-highlight', 'rgba(145, 152, 0, 0.3)');
     }
     document.documentElement.style.setProperty('--primary-color', primaryColor);
     document.documentElement.style.setProperty('--primary-color-transparent', `${primaryColor}84`);

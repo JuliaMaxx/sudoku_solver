@@ -98,8 +98,8 @@ button:active{
     display: grid;
     padding: 1rem;
     gap: 0.3rem;
-    width: 28rem;
-    height: 28rem;
+    width: 23rem;
+    height: 23rem;
     border-radius: 1rem;
     border: 0.2rem solid var(--primary-color);
 }
@@ -165,8 +165,8 @@ button:active{
         font-size: 12px;
     }
     #sudoku-grid{
-        width: 18rem;
-        height: 18rem;
+        width: 19rem;
+        height: 19rem;
     }
 }
 
@@ -175,8 +175,8 @@ button:active{
         font-size: 12px;
     }
     #sudoku-grid{
-        width: 25rem;
-        height: 25rem;
+        width: 26rem;
+        height: 26rem;
     }
     .sudoku-grid{
         padding: 0.5rem;
@@ -278,7 +278,7 @@ button:active{
     flex-direction: row;
     align-self: center;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .theme {
@@ -305,7 +305,7 @@ button:active{
     background: #F2E8DF;
 }
 #theme3{
-    background: #472f17;
+    background: #003c00;
 }
 #theme4{
     background: #140126;

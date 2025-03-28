@@ -13,17 +13,8 @@ const difficultyButtons = document.querySelectorAll(".difficulty-btn");
 
 solveButton.addEventListener("click", () => {
     solveSudoku();
-    cells.forEach((cell) => {
-        let row = parseInt(cell.dataset.row);
-        let col = parseInt(cell.dataset.col);
-        let value = cellValues[row][col];
-        value = value > 9? String.fromCharCode(value + 55) : value;
-        if (value !== 0) {
-            cell.value = value;
-        }
-    });
-    }
-)
+    updateGridDisplay();
+})
 
 generateButton.addEventListener("click", () => {
     modal.style.display = "flex";
@@ -61,13 +52,16 @@ function generateSudoku(difficulty){
             }
         }
     }
-    
+    updateGridDisplay();
+}
+
+function updateGridDisplay(){
     cells.forEach((cell) => {
         let row = parseInt(cell.dataset.row);
         let col = parseInt(cell.dataset.col);
         let value = cellValues[row][col];
         value = value > 9? String.fromCharCode(value + 55) : value;
-
+    
         if (value !== 0) {
             cell.value = value;
             cell.readOnly = true; 

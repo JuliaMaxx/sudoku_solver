@@ -107,21 +107,26 @@ function findNextEmptyCell() {
 }
 
 function solveSudoku(randomize = false) {
-    const emptyCell = findNextEmptyCell();
-    if (!emptyCell) return true;
-
-    const [row, col] = emptyCell;
-    const possibleNumbers =  [...Array(gridSize)].map((_, i) => (i + 1));
-    if (randomize) shuffleArray(possibleNumbers);
-
-    for (let num of possibleNumbers) {
-        cellValues[row][col] = num;
-        if (validateCell(row, col)) {
-            if (solveSudoku()) return true; 
+    if (generated){
+        setCellValues(solutionValues.map(row => [...row]));
+        return true;
+    } else {
+        const emptyCell = findNextEmptyCell();
+        if (!emptyCell) return true;
+    
+        const [row, col] = emptyCell;
+        const possibleNumbers =  [...Array(gridSize)].map((_, i) => (i + 1));
+        if (randomize) shuffleArray(possibleNumbers);
+    
+        for (let num of possibleNumbers) {
+            cellValues[row][col] = num;
+            if (validateCell(row, col)) {
+                if (solveSudoku()) return true; 
+            }
+            cellValues[row][col] = 0;
         }
-        cellValues[row][col] = 0;
+        return false;
     }
-    return false;
 }
 
 

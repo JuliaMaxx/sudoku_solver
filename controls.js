@@ -12,12 +12,17 @@ const resetButton = document.getElementById("resetButton");
 const modal = document.getElementById("difficultyModal");
 const closeModalBtn = document.getElementById("closeModal");
 const difficultyButtons = document.querySelectorAll(".difficulty-btn");
+const possibleNumbers =  [...Array(gridSize)].map((_, i) => (i + 1));
 
 export let generated = false;
 export let solutionValues = [];
 
 solveButton.addEventListener("click", () => {
-    solveSudoku();
+    if (aiSolveSudoku()) {
+        console.log("Sudoku Solved with AI!");
+    } else {
+        console.log("AI failed, using backtracking...");
+    }
     updateGridDisplay();
 })
 
@@ -129,6 +134,34 @@ function solveSudoku(randomize = false) {
     }
 }
 
+// AI SOLVE
+function applyConstraintPropagation(){
+    let progress = false;
+    const possibleNumbers =  [...Array(gridSize)].map((_, i) => (i + 1));
+
+    for (let row = 0; row < gridSize; row++) {
+        for (let col = 0; col < gridSize; col++) {
+            if (cellValues[row][col] === 0) {
+                if (possibleNumbers.length === 1) {
+                    cellValues[row][col] = possibleNumbers[0];
+                    progress = true;
+                }
+            }
+        }
+    }
+
+    return progress;
+}
+
+function aiSolveSudoku() {
+    let changed;
+
+    do {
+        changed = applyConstraintPropagation(gridSize);
+    } while (changed);
+
+    return solveSudoku();
+}
 
 // UTILITY
 function hasUniqueSolution(grid) {

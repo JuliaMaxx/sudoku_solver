@@ -15,12 +15,9 @@ window.onload = () => {
     generateGrid();
     cells[0].focus();
 
-    // Add click event listener to each cell to mark it as 'selected' when clicked
     cells.forEach(cell => {
         cell.addEventListener("click", () => {
-            // Remove 'selected' class from any other cell
             document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
-            // Add 'selected' class to clicked cell
             cell.classList.add('active');
         });
     });

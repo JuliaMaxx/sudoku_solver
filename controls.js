@@ -9,6 +9,7 @@ import { generated } from "./config.js";
 import { setGenerate } from "./config.js";
 import { solvedGridStyle } from "./config.js";
 import { grid } from "./config.js";
+import { gridSolved } from "./config.js";
 
 const solveButton = document.getElementById("solveButton");
 const solveCellButton = document.getElementById("solveCellButton");
@@ -33,6 +34,9 @@ solveButton.addEventListener("click", () => {
 solveCellButton.addEventListener("click", () => {
     solveSudoku();
     solveCell();
+    if (gridSolved()){
+        solvedGridStyle();
+    }
 });
 
 generateButton.addEventListener("click", () => {

@@ -70,6 +70,7 @@ function styleCell(cell){
         cell.style.fontSize = `1rem`; 
         grid.style.gap = "0.07rem";
         cell.style.boxShadow = "0.001rem 0.001rem 0.001rem 0.001rem var(--primary-color-transparent);"
+        cell.style.padding = '0';
     } else if (gridSize == 9){
         cell.style.fontSize = `1.2rem`; 
         grid.style.gap = "0.3rem";

@@ -1,4 +1,4 @@
-import { cellValues } from "./config.js";
+import { cellValues, resetCells } from "./config.js";
 import { validateCell } from "./config.js";
 import { gridSize } from "./config.js";
 import { cells } from "./config.js";
@@ -10,6 +10,7 @@ import { setGenerate } from "./config.js";
 import { solvedGridStyle } from "./config.js";
 import { grid } from "./config.js";
 import { gridSolved } from "./config.js";
+import { moveFocus } from "./config.js";
 
 const solveButton = document.getElementById("solveButton");
 const solveCellButton = document.getElementById("solveCellButton");
@@ -110,6 +111,7 @@ function resetGrid(){
     cells.forEach((cell) => {
         cell.classList.remove('valid');
         cell.classList.remove('invalid');
+        cell.classList.remove('active');
         cell.value = "";
         cell.readOnly = false; 
     });
@@ -201,15 +203,14 @@ function solveCell(){
 
     if (!activeCell){
         activeCell = findNextEmptyCellValue();
-
-    } else {
-        document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
     }
     let row = parseInt(activeCell.dataset.row);
     let col = parseInt(activeCell.dataset.col);
     let value = cellValues[row][col];
     value = value > 9? String.fromCharCode(value + 55) : value;
     activeCell.value = value;
+    document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
+    moveFocus(row, col, 'right')
     activeCell.classList.add("valid");
 }
 

@@ -141,7 +141,7 @@ button:active{
 
 #sudoku-grid.solved::before{
     filter: blur(1.5rem);
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 @keyframes spin {

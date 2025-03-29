@@ -9,6 +9,7 @@ import { resetCells } from "./config.js";
 import { generated } from "./config.js";
 import { solutionValues } from "./controls.js";
 import { gridSolved } from "./config.js";
+import { moveFocus } from "./config.js";
 
 window.onload = () => {
     setGridSize(9);
@@ -56,43 +57,6 @@ export function generateGrid(){
 
             grid.appendChild(cell);
             cells.push(cell); 
-        }
-    }
-}
-
-function moveFocus(row, col, direction) {
-    let newRow = row, newCol = col;
-    
-    while (true) {
-        if (direction === "right") {
-            newCol++;
-            if (newCol >= gridSize) {
-                newCol = 0;
-                newRow = (newRow + 1) % gridSize;
-            }
-        }
-
-        if (direction === "left") {
-            newCol--;
-            if (newCol < 0) { 
-                newCol = gridSize - 1;
-                newRow = (newRow - 1 + gridSize) % gridSize;
-            }
-        }
-
-        if (direction === "down") {
-            newRow = (newRow + 1) % gridSize;
-        }
-
-        if (direction === "up") {
-            newRow = (newRow - 1 + gridSize) % gridSize;
-        }
-
-        const nextCell = document.querySelector(`[data-row="${newRow}"][data-col="${newCol}"]`);
-        if (!nextCell.readOnly) {  
-            nextCell.focus();
-            setTimeout(() => setCaretToEnd(nextCell), 0);
-            break;
         }
     }
 }

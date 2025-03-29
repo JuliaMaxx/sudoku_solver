@@ -11,6 +11,10 @@ import { solutionValues } from "./controls.js";
 import { gridSolved } from "./config.js";
 import { moveFocus } from "./config.js";
 
+window.addEventListener("load", function() {
+    document.getElementById("loader").classList.add("hidden-loader");
+});
+
 window.onload = () => {
     setGridSize(9);
     generateGrid();

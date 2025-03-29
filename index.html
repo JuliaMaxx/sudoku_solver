@@ -12,10 +12,15 @@
     <script type="module" src="main.js" defer></script>
     <script defer type="module" src="ui.js"></script>
     <script defer type="module" src="controls.js"></script>
+    <link rel="icon" type="image/png" href="img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
     <title>Sudoku Solver</title>
 </head>
 
 <body>
+    <div class="loader-container" id="loader">
+        <div class="loader"></div>
+    </div>
     <div class="theme-wrapper">
         <div class="theme" id="theme1"></div>
         <div class="theme selected" id="theme2"></div>

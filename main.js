@@ -96,18 +96,14 @@ function setCaretToEnd(cell) {
 
 function styleCell(cell){
     if (gridSize == 16){
-        if (isMobile()){
-            cell.style.fontSize = `${cell.clientWidth * 0.7}px`; 
-            grid.style.gap = "0.06rem";
-        }
-        cell.style.fontSize = `${cell.clientWidth * 0.8}px`; 
+        cell.style.fontSize = `1.1rem`; 
         grid.style.gap = "0.07rem";
         cell.style.boxShadow = "0.001rem 0.001rem 0.001rem 0.001rem var(--primary-color-transparent);"
     } else if (gridSize == 9){
-        cell.style.fontSize = `${cell.clientWidth * 0.6}px`; 
+        cell.style.fontSize = `1.2rem`; 
         grid.style.gap = "0.3rem";
     } else {
-        cell.style.fontSize = `${cell.clientWidth * 0.5}px`; 
+        cell.style.fontSize = `2rem`; 
         grid.style.gap = "0.3rem";
     }
 }

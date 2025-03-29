@@ -190,6 +190,7 @@ function aiSolveSudoku() {
 }
 
 
+// SOLVE CELL
 function solveCell(){
     let activeCell = null;
     cells.forEach((cell) => {
@@ -198,21 +199,18 @@ function solveCell(){
         }
     })
 
-    if (activeCell){
-        let row = parseInt(activeCell.dataset.row);
-        let col = parseInt(activeCell.dataset.col);
-        let value = cellValues[row][col];
-        value = value > 9? String.fromCharCode(value + 55) : value;
-        activeCell.value = value;
-        document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
+    if (!activeCell){
+        activeCell = findNextEmptyCellValue();
+
     } else {
-        let nextCell = findNextEmptyCellValue();
-        let row = parseInt(nextCell.dataset.row);
-        let col = parseInt(nextCell.dataset.col);
-        let value = cellValues[row][col];
-        value = value > 9? String.fromCharCode(value + 55) : value;
-        nextCell.value = value;
+        document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
     }
+    let row = parseInt(activeCell.dataset.row);
+    let col = parseInt(activeCell.dataset.col);
+    let value = cellValues[row][col];
+    value = value > 9? String.fromCharCode(value + 55) : value;
+    activeCell.value = value;
+    activeCell.classList.add("valid");
 }
 
 

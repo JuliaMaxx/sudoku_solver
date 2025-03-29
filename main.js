@@ -6,7 +6,7 @@ import { cellValues } from "./config.js";
 import { validateCell } from "./config.js";
 import { setGridSize } from "./config.js";
 import { resetCells } from "./config.js";
-import { generated } from "./controls.js";
+import { generated } from "./config.js";
 import { solutionValues } from "./controls.js";
 
 window.onload = () => {
@@ -107,14 +107,15 @@ function setCaretToEnd(cell) {
 
 function styleCell(cell){
     if (gridSize == 16){
-        cell.style.fontSize = `${cell.clientWidth * 0.8}px`; 
+        cell.style.fontSize = `1rem`; 
         grid.style.gap = "0.07rem";
         cell.style.boxShadow = "0.001rem 0.001rem 0.001rem 0.001rem var(--primary-color-transparent);"
+        cell.style.padding = `0`;
     } else if (gridSize == 9){
-        cell.style.fontSize = `${cell.clientWidth * 0.6}px`; 
+        cell.style.fontSize = `1.2rem`; 
         grid.style.gap = "0.3rem";
     } else {
-        cell.style.fontSize = `${cell.clientWidth * 0.5}px`; 
+        cell.style.fontSize = `2rem`; 
         grid.style.gap = "0.3rem";
     }
 }

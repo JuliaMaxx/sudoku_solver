@@ -5,6 +5,8 @@ import { cells } from "./config.js";
 import { initializeCellValues } from "./config.js";
 import { setCellValues } from "./config.js";
 import { subgridSize } from "./config.js";
+import { generated } from "./config.js";
+import { setGenerate } from "./config.js";
 
 const solveButton = document.getElementById("solveButton");
 const solveCellButton = document.getElementById("solveCellButton");
@@ -14,7 +16,6 @@ const modal = document.getElementById("difficultyModal");
 const closeModalBtn = document.getElementById("closeModal");
 const difficultyButtons = document.querySelectorAll(".difficulty-btn");
 
-export let generated = false;
 export let solutionValues = [];
 
 solveButton.addEventListener("click", () => {
@@ -77,7 +78,7 @@ function generateSudoku(difficulty){
 
     setCellValues(puzzle.map(row => [...row]));
     updateGridDisplay();
-    generated = true;
+    setGenerate(true);
 }
 
 // MODAL
@@ -96,6 +97,7 @@ difficultyButtons.forEach(button => {
 // RESET
 function resetGrid(){
     initializeCellValues();
+    setGenerate(false);
     cellValues.forEach(row => row.fill(0));
     cells.forEach((cell) => {
         cell.classList.remove('valid');
@@ -129,7 +131,7 @@ function findNextEmptyCellValue() {
 function solveSudoku(randomize = false) {
     if (generated){
         setCellValues(solutionValues.map(row => [...row]));
-        generated = false;
+        setGenerate(false);
         return true;
     } else {
         const emptyCell = findNextEmptyCell();

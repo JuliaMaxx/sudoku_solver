@@ -7,12 +7,12 @@ import { setCellValues } from "./config.js";
 import { subgridSize } from "./config.js";
 
 const solveButton = document.getElementById("solveButton");
+const solveCellButton = document.getElementById("solveCellButton");
 const generateButton = document.getElementById("generateButton");
 const resetButton = document.getElementById("resetButton");
 const modal = document.getElementById("difficultyModal");
 const closeModalBtn = document.getElementById("closeModal");
 const difficultyButtons = document.querySelectorAll(".difficulty-btn");
-const possibleNumbers =  [...Array(gridSize)].map((_, i) => (i + 1));
 
 export let generated = false;
 export let solutionValues = [];
@@ -24,7 +24,12 @@ solveButton.addEventListener("click", () => {
         console.log("AI failed, using backtracking...");
     }
     updateGridDisplay();
-})
+});
+
+solveCellButton.addEventListener("click", () => {
+    solveSudoku();
+    solveCell();
+});
 
 generateButton.addEventListener("click", () => {
     modal.style.display = "flex";
@@ -88,7 +93,6 @@ difficultyButtons.forEach(button => {
     });
 });
 
-
 // RESET
 function resetGrid(){
     initializeCellValues();
@@ -109,6 +113,17 @@ function findNextEmptyCell() {
         }
     }
     return null;
+}
+
+function findNextEmptyCellValue() {
+    let empty = null;
+    for (let i = 0; i < cells.length; i++){
+        if (cells[i].value === '') {
+            empty = cells[i];
+            break;
+        } 
+    }
+    return empty;
 }
 
 function solveSudoku(randomize = false) {
@@ -163,6 +178,33 @@ function aiSolveSudoku() {
 
     return solveSudoku();
 }
+
+
+function solveCell(){
+    let activeCell = null;
+    cells.forEach((cell) => {
+        if (cell.classList.contains('active')){
+            activeCell = cell;
+        }
+    })
+
+    if (activeCell){
+        let row = parseInt(activeCell.dataset.row);
+        let col = parseInt(activeCell.dataset.col);
+        let value = cellValues[row][col];
+        value = value > 9? String.fromCharCode(value + 55) : value;
+        activeCell.value = value;
+        document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
+    } else {
+        let nextCell = findNextEmptyCellValue();
+        let row = parseInt(nextCell.dataset.row);
+        let col = parseInt(nextCell.dataset.col);
+        let value = cellValues[row][col];
+        value = value > 9? String.fromCharCode(value + 55) : value;
+        nextCell.value = value;
+    }
+}
+
 
 // UTILITY
 function hasUniqueSolution(grid) {

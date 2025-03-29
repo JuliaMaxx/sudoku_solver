@@ -61,12 +61,6 @@ export function generateGrid(){
     }
 }
 
-function setCaretToEnd(cell) {
-    const length = cell.value.length;
-    cell.focus();
-    cell.setSelectionRange(length, length);
-}
-
 function styleCell(cell){
     if (gridSize == 16){
         cell.style.fontSize = `1rem`; 

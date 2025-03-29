@@ -85,7 +85,7 @@ function generateSudoku(difficulty){
     }
 
     setCellValues(puzzle.map(row => [...row]));
-    updateGridDisplay();
+    updateGridDisplay(true);
     setGenerate(true);
 }
 
@@ -319,7 +319,7 @@ function transposeGrid() {
     setCellValues(newGrid);
 }
 
-function updateGridDisplay(){
+function updateGridDisplay(readonly = false){
     cells.forEach((cell) => {
         let row = parseInt(cell.dataset.row);
         let col = parseInt(cell.dataset.col);
@@ -328,7 +328,9 @@ function updateGridDisplay(){
     
         if (value !== 0) {
             cell.value = value;
-            // cell.readOnly = true; 
+            if (readonly){
+                cell.readOnly = true; 
+            }
         }
     });
 }

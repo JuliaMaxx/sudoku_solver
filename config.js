@@ -107,3 +107,9 @@ export function moveFocus(row, col, direction) {
         }
     }
 }
+
+function setCaretToEnd(cell) {
+    const length = cell.value.length;
+    cell.focus();
+    cell.setSelectionRange(length, length);
+}

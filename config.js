@@ -28,6 +28,7 @@ export function setGridSize(newSize) {
     setGenerate(false);
     resetCells();
     initializeCellValues();
+    grid.classList.remove('solved');
 }
 
 export function validateCell(row, col) {
@@ -52,4 +53,19 @@ export function validateCell(row, col) {
     }
 
     return true;
+}
+
+export function gridSolved(){
+    for (let i = 0; i < cells.length; i++){
+        let row = parseInt(cells[i].dataset.row);
+        let col = parseInt(cells[i].dataset.col);
+        if (!validateCell(row, col) || cells[i].value === ''){
+            return false;
+        }
+    }
+    return true;
+}
+
+export function solvedGridStyle(){
+    grid.classList.add('solved');
 }

@@ -7,6 +7,8 @@ import { setCellValues } from "./config.js";
 import { subgridSize } from "./config.js";
 import { generated } from "./config.js";
 import { setGenerate } from "./config.js";
+import { solvedGridStyle } from "./config.js";
+import { grid } from "./config.js";
 
 const solveButton = document.getElementById("solveButton");
 const generateButton = document.getElementById("generateButton");
@@ -25,6 +27,7 @@ solveButton.addEventListener("click", () => {
         console.log("AI failed, using backtracking...");
     }
     updateGridDisplay();
+    solvedGridStyle();
 })
 
 generateButton.addEventListener("click", () => {
@@ -94,6 +97,7 @@ difficultyButtons.forEach(button => {
 function resetGrid(){
     initializeCellValues();
     setGenerate(false);
+    grid.classList.remove('solved');
     cellValues.forEach(row => row.fill(0));
     cells.forEach((cell) => {
         cell.classList.remove('valid');
@@ -279,7 +283,7 @@ function updateGridDisplay(){
     
         if (value !== 0) {
             cell.value = value;
-            cell.readOnly = true; 
+            // cell.readOnly = true; 
         }
     });
 }

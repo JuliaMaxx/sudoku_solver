@@ -2,6 +2,7 @@
     --primary-color: #000000;
     --primary-color-transparent: #00000084;
     --background-color: #F2E8DF;
+    --neon-glow: 132, 97%, 39%;
     --valid-color: rgb(28, 210, 28);
     --invalid-color: rgb(231, 19, 19);
     --row-highlight: rgba(56, 255, 56, 0.3);
@@ -105,8 +106,51 @@ button:active{
     width: 23rem;
     height: 23rem;
     border-radius: 1rem;
+    background-color: var(--background-color);
     border: 0.2rem solid var(--primary-color);
     -webkit-overflow-scrolling: touch;
+    position: relative;
+}
+
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+#sudoku-grid.solved{
+    border: 0.2rem solid transparent;
+
+}
+
+
+#sudoku-grid.solved::after, #sudoku-grid.solved::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: repeating-conic-gradient(from var(--angle),#0000 0% 25%, hsl(var(--neon-glow), 10%) 0%, hsl(var(--neon-glow), 32%), hsl(var(--neon-glow), 50%), hsl(var(--neon-glow), 100%), hsl(var(--neon-glow), 80%) 50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    padding: 0.4rem;
+    border-radius: 1.2rem;
+    animation: 3s spin linear infinite;
+}
+
+#sudoku-grid.solved::before{
+    filter: blur(1.5rem);
+    opacity: 0.5;
+}
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+    to {
+        --angle: 360deg;
+    }
 }
 
 /* CELLS */
@@ -118,7 +162,6 @@ button:active{
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* font-size: calc(100% + 0.25vw); */
     -webkit-font-smoothing: none;
     text-rendering: optimizeSpeed;
     border-radius: 0.3rem;

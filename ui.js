@@ -15,10 +15,10 @@ buttonSize4.addEventListener('click', () => handleSizeButtonClick(4));
 buttonSize9.addEventListener('click', () => handleSizeButtonClick(9));
 buttonSize16.addEventListener('click', () => handleSizeButtonClick(16));
 
-theme1.addEventListener('click', (event) => handleTheme(event, '#000000', '#F2C4DA'))
-theme2.addEventListener('click', (event) => handleTheme(event, '#000000', '#F2E8DF'))
-theme3.addEventListener('click', (event) => handleTheme(event, '#e2a75e','#003c00'))
-theme4.addEventListener('click', (event) => handleTheme(event, '#ba7ee2','#140126'))
+theme1.addEventListener('click', (event) => handleTheme(event, '#000000', '#F2C4DA', `327, 100%, 50%`))
+theme2.addEventListener('click', (event) => handleTheme(event, '#000000', '#F2E8DF', '132, 97%, 39%'))
+theme3.addEventListener('click', (event) => handleTheme(event, '#e2a75e','#003c00', '43, 100%, 50%'))
+theme4.addEventListener('click', (event) => handleTheme(event, '#ba7ee2','#140126', '307, 100%, 50%'))
 
 
 function handleSizeButtonClick(size){
@@ -27,7 +27,7 @@ function handleSizeButtonClick(size){
     generateGrid();
 }
 
-function handleTheme(event, primaryColor, secondaryColor){
+function handleTheme(event, primaryColor, secondaryColor, neonColor){
     if (event.target === theme1 || event.target === theme2) {
         document.documentElement.style.setProperty('--row-highlight', 'rgba(56, 255, 56, 0.3)');
         document.documentElement.style.setProperty('--col-highlight', 'rgba(65, 65, 255, 0.3)');
@@ -40,6 +40,7 @@ function handleTheme(event, primaryColor, secondaryColor){
     document.documentElement.style.setProperty('--primary-color', primaryColor);
     document.documentElement.style.setProperty('--primary-color-transparent', `${primaryColor}84`);
     document.documentElement.style.setProperty('--background-color', secondaryColor);
+    document.documentElement.style.setProperty('--neon-glow', neonColor);
     deselectThemes();
     event.target.classList.add('selected');
 }

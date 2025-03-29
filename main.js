@@ -1,4 +1,4 @@
-import { grid } from "./config.js";
+import { grid, solvedGridStyle } from "./config.js";
 import { cells } from "./config.js";
 import { gridSize } from "./config.js";
 import { subgridSize } from "./config.js";
@@ -8,6 +8,7 @@ import { setGridSize } from "./config.js";
 import { resetCells } from "./config.js";
 import { generated } from "./config.js";
 import { solutionValues } from "./controls.js";
+import { gridSolved } from "./config.js";
 
 window.onload = () => {
     setGridSize(9);
@@ -99,7 +100,6 @@ function styleCell(cell){
         cell.style.fontSize = `1rem`; 
         grid.style.gap = "0.07rem";
         cell.style.boxShadow = "0.001rem 0.001rem 0.001rem 0.001rem var(--primary-color-transparent);"
-        cell.style.padding = `0`;
     } else if (gridSize == 9){
         cell.style.fontSize = `1.2rem`; 
         grid.style.gap = "0.3rem";
@@ -131,6 +131,10 @@ function handleCellInput(event){
             cell.classList.add("valid");
             cell.classList.remove("invalid");
             moveFocus(row, col, "right"); 
+            
+            if (gridSolved()){
+                solvedGridStyle();
+            }
         } else {
             cell.classList.add("invalid");
             cell.classList.remove("valid");

@@ -109,6 +109,7 @@ function findNextEmptyCell() {
 function solveSudoku(randomize = false) {
     if (generated){
         setCellValues(solutionValues.map(row => [...row]));
+        generated = false;
         return true;
     } else {
         const emptyCell = findNextEmptyCell();

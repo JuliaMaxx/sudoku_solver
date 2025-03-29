@@ -67,7 +67,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: var(--background-color);
-    background-image: url(background3.png);
+    background-image: url(img/background.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

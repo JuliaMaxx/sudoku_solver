@@ -5,6 +5,10 @@ export let subgridSize = Math.sqrt(gridSize);
 export let cells = [];
 export let cellValues;
 
+export function setCellValues(values){
+    cellValues = values;
+}
+
 export function initializeCellValues() {
     cellValues = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
 }

@@ -6,6 +6,8 @@ import { cellValues } from "./config.js";
 import { validateCell } from "./config.js";
 import { setGridSize } from "./config.js";
 import { resetCells } from "./config.js";
+import { generated } from "./controls.js";
+import { solutionValues } from "./controls.js";
 
 window.onload = () => {
     setGridSize(9);
@@ -120,7 +122,9 @@ function handleCellInput(event){
         cell.value = lastCharacter;
 
         cellValues[row][col] = gridSize === 16 ? parseInt(lastCharacter, 17) : parseInt(lastCharacter);
-        const valid = validateCell(row, col);
+        const valid = generated?
+            cellValues[row][col] === solutionValues[row][col]:
+            validateCell(row, col);
 
         if (valid){
             cell.classList.add("valid");

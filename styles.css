@@ -10,6 +10,10 @@
     font-size: 16px;
 }
 
+html, body{
+    -webkit-text-size-adjust: none; 
+}
+
 /* Fonts */
 .amatic-sc-regular {
     font-family: "Amatic SC", sans-serif;
@@ -102,6 +106,7 @@ button:active{
     height: 23rem;
     border-radius: 1rem;
     border: 0.2rem solid var(--primary-color);
+    -webkit-overflow-scrolling: touch;
 }
 
 /* CELLS */
@@ -113,11 +118,15 @@ button:active{
     justify-content: center;
     align-items: center;
     text-align: center;
+    /* font-size: calc(100% + 0.25vw); */
+    -webkit-font-smoothing: none;
+    text-rendering: optimizeSpeed;
     border-radius: 0.3rem;
     border: 0.1rem solid var(--primary-color);
     background-color: transparent;
     box-shadow: 0.1rem 0.1rem 0.1rem 0.001rem var(--primary-color-transparent);
     transition: all 0.1s;
+    line-height: 1.2;
 }
 
 .sudoku-cell:focus{

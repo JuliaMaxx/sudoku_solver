@@ -4,6 +4,11 @@ export let gridSize = 9;
 export let subgridSize = Math.sqrt(gridSize);
 export let cells = [];
 export let cellValues;
+export let generated = false;
+
+export function setGenerate(val){
+    generated = val;
+}
 
 export function setCellValues(values){
     cellValues = values;
@@ -20,6 +25,7 @@ export function resetCells() {
 export function setGridSize(newSize) {
     gridSize = newSize;
     subgridSize = Math.sqrt(gridSize);
+    setGenerate(false);
     resetCells();
     initializeCellValues();
 }

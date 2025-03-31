@@ -6,6 +6,9 @@ It features an intuitive UI, the ability to generate puzzles of various difficul
 
 ## Demo: [Sudoku Solver](https://juliamaxx.github.io/sudoku_solver/)
 
+![image](https://github.com/user-attachments/assets/98848603-2a80-4872-9d5c-cf3e6113edf9)
+
+
 ## Features
 - **AI Solver**: Solves Sudoku puzzles using AI.
 - **Puzzle Generation**: Generates puzzles of varying difficulty.

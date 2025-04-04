@@ -209,9 +209,9 @@ function solveCell(){
     let value = cellValues[row][col];
     value = value > 9? String.fromCharCode(value + 55) : value;
     activeCell.value = value;
+    activeCell.readOnly = true;
     document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
     moveFocus(row, col, 'right')
-    activeCell.classList.add("valid");
 }
 
 

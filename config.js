@@ -73,7 +73,7 @@ export function solvedGridStyle(){
 export function moveFocus(row, col, direction) {
     let newRow = row, newCol = col;
     
-    while (true) {
+    while (true && !gridSolved()) {
         if (direction === "right") {
             newCol++;
             if (newCol >= gridSize) {

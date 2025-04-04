@@ -28,7 +28,7 @@ solveButton.addEventListener("click", () => {
     } else {
         console.log("AI failed, using backtracking...");
     }
-    updateGridDisplay();
+    updateGridDisplay(true);
     if (gridSolved()){
         solvedGridStyle();
     }
@@ -108,6 +108,7 @@ difficultyButtons.forEach(button => {
 function resetGrid(){
     initializeCellValues();
     setGenerate(false);
+    solutionValues = [];
     grid.classList.remove('solved');
     cellValues.forEach(row => row.fill(0));
     cells.forEach((cell) => {
@@ -213,14 +214,16 @@ function solveCell(){
     if (!activeCell){
         activeCell = findNextEmptyCellValue();
     }
-    let row = parseInt(activeCell.dataset.row);
-    let col = parseInt(activeCell.dataset.col);
-    let value = cellValues[row][col];
-    value = value > 9? String.fromCharCode(value + 55) : value;
-    activeCell.value = value;
-    activeCell.readOnly = true;
-    document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
-    moveFocus(row, col, 'right')
+    if (activeCell){
+        let row = parseInt(activeCell.dataset.row);
+        let col = parseInt(activeCell.dataset.col);
+        let value = cellValues[row][col];
+        value = value > 9? String.fromCharCode(value + 55) : value;
+        activeCell.value = value;
+        activeCell.readOnly = true;
+        document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
+        moveFocus(row, col, 'right')
+    }
 }
 
 

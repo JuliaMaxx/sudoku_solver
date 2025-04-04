@@ -204,24 +204,3 @@ function highlightRowColSubgrid(event) {
         }
     });
 }
-
-// function isMobile(){
-//     return window.innerWidth <= 768;
-// }
-
-// function zoomInOnFocus(cell){
-//     if(isMobile()) {
-//         document.querySelector("meta[name='viewport']").setAttribute('content', 'width=device-width, initial-scale=1.5, maximum-scale=1.5, user-scalable=yes');
-
-//         cell.scrollIntoView({
-//             block: 'center',     // Vertically center the cell in the viewport
-//             inline: 'center'     // Horizontally center the cell in the viewport
-//         });
-//     }
-// }
-
-// function resetZoom(){
-//     if (isMobile()) {
-//         document.querySelector("meta[name='viewport']").setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes');
-//     }
-// }

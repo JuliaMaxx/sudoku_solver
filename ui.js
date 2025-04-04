@@ -33,7 +33,7 @@ function handleTheme(event, primaryColor, secondaryColor, neonColor){
         document.documentElement.style.setProperty('--col-highlight', 'rgba(65, 65, 255, 0.3)');
         document.documentElement.style.setProperty('--subgrid-highlight', 'rgba(255, 255, 62, 0.3)');
     } else {
-        document.documentElement.style.setProperty('--row-highlight', 'rgba(0, 154, 0, 0.3)');
+        document.documentElement.style.setProperty('--row-highlight', 'rgba(0, 154, 149, 0.3)');
         document.documentElement.style.setProperty('--col-highlight', 'rgba(160, 0, 51, 0.3)');
         document.documentElement.style.setProperty('--subgrid-highlight', 'rgba(145, 152, 0, 0.3)');
     }

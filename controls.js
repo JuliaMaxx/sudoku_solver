@@ -29,7 +29,9 @@ solveButton.addEventListener("click", () => {
         console.log("AI failed, using backtracking...");
     }
     updateGridDisplay();
-    solvedGridStyle();
+    if (gridSolved()){
+        solvedGridStyle();
+    }
 })
 
 solveCellButton.addEventListener("click", () => {
@@ -146,8 +148,15 @@ function solveSudoku(randomize = false) {
     } else {
         const emptyCell = findNextEmptyCell();
         if (!emptyCell) return true;
-    
+
         const [row, col] = emptyCell;
+        for (let i = 0; i < row; i++){
+            for(let j = 0; j < col; j++){
+                if (!validateCell(i, j)){
+                    return false;
+                }
+            }
+        }
         const possibleNumbers =  [...Array(gridSize)].map((_, i) => (i + 1));
         if (randomize) shuffleArray(possibleNumbers);
     

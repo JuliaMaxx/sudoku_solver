@@ -25,12 +25,10 @@ window.onload = () => {
             document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
             cell.classList.add('active');
         });
-        if (isMobile()){
-            cell.addEventListener("click", () => {
-                document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
-                cell.classList.add('active');
-            });
-        }
+        cell.addEventListener("click", () => {
+            document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
+            cell.classList.add('active');
+        });
     });
 
 }
@@ -209,8 +207,4 @@ function highlightRowColSubgrid(event) {
             cell.classList.remove("highlight-subgrid");
         }
     });
-}
-
-function isMobile(){
-    return window.innerWidth <= 768;
 }

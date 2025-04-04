@@ -11,6 +11,7 @@ import { solvedGridStyle } from "./config.js";
 import { grid } from "./config.js";
 import { gridSolved } from "./config.js";
 import { moveFocus } from "./config.js";
+import { findNextEmptyCellValue } from "./config.js";
 
 const solveButton = document.getElementById("solveButton");
 const solveCellButton = document.getElementById("solveCellButton");
@@ -37,9 +38,6 @@ solveButton.addEventListener("click", () => {
 solveCellButton.addEventListener("click", () => {
     solveSudoku();
     solveCell();
-    if (gridSolved()){
-        solvedGridStyle();
-    }
 });
 
 generateButton.addEventListener("click", () => {
@@ -101,6 +99,7 @@ difficultyButtons.forEach(button => {
         const level = event.target.getAttribute("data-level");
         generateSudoku(level)
         modal.style.display = "none";
+        solveCellButton.style.display = "inline";
     });
 });
 
@@ -108,6 +107,7 @@ difficultyButtons.forEach(button => {
 function resetGrid(){
     initializeCellValues();
     setGenerate(false);
+    solveCellButton.style.display = "none";
     solutionValues = [];
     grid.classList.remove('solved');
     cellValues.forEach(row => row.fill(0));
@@ -130,16 +130,6 @@ function findNextEmptyCell() {
     return null;
 }
 
-function findNextEmptyCellValue() {
-    let empty = null;
-    for (let i = 0; i < cells.length; i++){
-        if (cells[i].value === '') {
-            empty = cells[i];
-            break;
-        } 
-    }
-    return empty;
-}
 
 function solveSudoku(randomize = false) {
     if (generated){
@@ -204,30 +194,40 @@ function aiSolveSudoku() {
 
 // SOLVE CELL
 function solveCell(){
+    let activeCell = findActiveCell()
+    if (activeCell){
+        let row = parseInt(activeCell.dataset.row);
+        let col = parseInt(activeCell.dataset.col);
+        let value = solutionValues[row][col];
+        value = value > 9? String.fromCharCode(value + 55) : value;
+        activeCell.value = value;
+        activeCell.readOnly = true;
+        document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
+        activeCell.classList.remove("invalid");
+        moveFocus(row, col, 'right')
+        if (!findActiveCell()){
+            solvedGridStyle();
+        }
+    }
+}
+
+
+// UTILITY
+function findActiveCell(){
     let activeCell = null;
     cells.forEach((cell) => {
         if (cell.classList.contains('active')){
             activeCell = cell;
         }
     })
-
+    
     if (!activeCell){
         activeCell = findNextEmptyCellValue();
     }
-    if (activeCell){
-        let row = parseInt(activeCell.dataset.row);
-        let col = parseInt(activeCell.dataset.col);
-        let value = cellValues[row][col];
-        value = value > 9? String.fromCharCode(value + 55) : value;
-        activeCell.value = value;
-        activeCell.readOnly = true;
-        document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
-        moveFocus(row, col, 'right')
-    }
+    if (activeCell) return activeCell;
+    return null;
 }
 
-
-// UTILITY
 function hasUniqueSolution(grid) {
     let solutions = 0;
 

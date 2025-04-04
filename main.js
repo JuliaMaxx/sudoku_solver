@@ -21,7 +21,7 @@ window.onload = () => {
     cells[0].focus();
 
     cells.forEach(cell => {
-        cell.addEventListener("click", () => {
+        cell.addEventListener("focus", () => {
             document.querySelectorAll('.active').forEach(c => c.classList.remove('active'));
             cell.classList.add('active');
         });

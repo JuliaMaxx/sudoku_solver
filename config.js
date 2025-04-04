@@ -5,6 +5,7 @@ export let subgridSize = Math.sqrt(gridSize);
 export let cells = [];
 export let cellValues;
 export let generated = false;
+const solveCellButton = document.getElementById("solveCellButton");
 
 export function setGenerate(val){
     generated = val;
@@ -23,12 +24,25 @@ export function resetCells() {
 }
 
 export function setGridSize(newSize) {
+    solveCellButton.style.display = "none";
     gridSize = newSize;
     subgridSize = Math.sqrt(gridSize);
     setGenerate(false);
     resetCells();
     initializeCellValues();
     grid.classList.remove('solved');
+}
+
+export function findNextEmptyCellValue() {
+    let empty = null;
+    for (let i = 0; i < cells.length; i++){
+        const cell = cells[i];
+        if (cell.value === '' || cell.classList.contains('invalid')) {
+            empty = cell;
+            break;
+        } 
+    }
+    return empty;
 }
 
 export function validateCell(row, col) {
@@ -73,7 +87,7 @@ export function solvedGridStyle(){
 export function moveFocus(row, col, direction) {
     let newRow = row, newCol = col;
     
-    while (true && !gridSolved()) {
+    while (true && findNextEmptyCellValue()) {
         if (direction === "right") {
             newCol++;
             if (newCol >= gridSize) {

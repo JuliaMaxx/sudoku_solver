@@ -113,7 +113,7 @@ export function moveFocus(row, col, direction) {
         }
 
         const nextCell = document.querySelector(`[data-row="${newRow}"][data-col="${newCol}"]`);
-        if (!nextCell.readOnly) {  
+        if (!nextCell.readOnly && !nextCell.classList.contains("valid")) {  
             nextCell.focus();
             nextCell.classList.add('active');
             setTimeout(() => setCaretToEnd(nextCell), 0);
